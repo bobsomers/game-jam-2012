@@ -23,7 +23,6 @@ function Player:update(dt)
       self:spinCW(dt)
    end
    self.position = polarToCartesian(self.RADIUS, self.theta)
-   print(self.RADIUS .. " " .. self.theta .. " " .. tostring(self.position))
 end
 
 function Player:draw()
