@@ -28,3 +28,11 @@ function play_state:draw()
 
     snake:draw()
 end
+
+function play_state:mousereleased(x, y, button)
+    if button == "wd" then
+        snake:rotateLeft()
+    elseif button == "wu" then
+        snake:rotateRight()
+    end
+end
