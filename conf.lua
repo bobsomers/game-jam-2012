@@ -7,5 +7,6 @@ function love.conf(t)
    t.screen.width = 1024
    t.screen.height = 768
 
+   -- Debugging for now.
    t.console = true
 end

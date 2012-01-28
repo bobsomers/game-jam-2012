@@ -1,19 +1,24 @@
-love.filesystem.load("plane.lua")()
-Gamestate = require "hump.gamestate"
+-- Require any needed modules.
+local Gamestate = require "hump.gamestate"
 local Vector =  require "hump.vector"
+require "plane" -- TODO
 
+-- TODO
 love.filesystem.load("snake.lua")()
 love.filesystem.load("bullet.lua")()
 love.filesystem.load("player.lua")()
 
-play_state = Gamestate.new()
+-- Create the game state.
+local play = Gamestate.new()
+
 local testPic = love.graphics.newImage("tmpart/plane.jpg");
 
 local snake = Snake()
 local bullets = {}    
 local player = Player()
 
-function play_state:init()
+-- Initialize the state. Called once when it's first created.
+function play:init()
    love.graphics.setBackgroundColor(255, 255, 255)
 
    snake:init()
@@ -24,11 +29,13 @@ function play_state:init()
    p3 = Plane ("red", testPic, 450, 0, -20, -1); 
 end
 
-function play_state:enter(previous)
+-- Called when this state is entered with the previous state.
+function play:enter(previous)
 
 end
 
-function play_state:update(dt)
+-- Called when this state is updated.
+function play:update(dt)
    snake:update(dt)
    player:update(dt)
    p:update(dt)
@@ -45,7 +52,8 @@ function play_state:update(dt)
    
 end
 
-function play_state:draw()
+-- Called when this state is drawn.
+function play:draw()
    snake:draw()
    player:draw()
    p:draw();
@@ -57,10 +65,14 @@ function play_state:draw()
    end
 end
 
-function play_state:mousereleased(x, y, button)
+-- Called when the mouse is released in this state.
+function play:mousereleased(x, y, button)
    if button == "l" then
 	   local bullet = Bullet();
       bullet:fire(Vector(512, 512), Vector(0,200))
       table.insert(bullets, bullet)
    end
 end
+
+-- Used for idiomatic module loading.
+return play
