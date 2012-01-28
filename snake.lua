@@ -3,7 +3,7 @@ local Vector = require "hump.vector"
 
 Snake = Class(function(self)
     self.position = Vector(1024 / 2, 768 / 2)
-    self.SPIN_RATE = 0.3
+    self.SPIN_RATE = 1.5
     self.rotation = 0
 end)
 
@@ -12,7 +12,12 @@ function Snake:init()
 end
 
 function Snake:update(dt)
-
+   if love.keyboard.isDown("o") then
+      self:spinCCW(dt)
+   end
+   if love.keyboard.isDown("p") then
+      self:spinCW(dt)
+   end
 end
 
 function Snake:draw()
@@ -23,10 +28,10 @@ function Snake:draw()
         100, 100)
 end
 
-function Snake:rotateLeft()
-    self.rotation = self.rotation - self.SPIN_RATE
+function Snake:spinCW(dt)
+   self.rotation = self.rotation + self.SPIN_RATE * dt
 end
 
-function Snake:rotateRight()
-    self.rotation = self.rotation + self.SPIN_RATE
+function Snake:spinCCW(dt)
+   self.rotation = self.rotation - self.SPIN_RATE * dt
 end

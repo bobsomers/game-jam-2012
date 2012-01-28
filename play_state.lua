@@ -19,7 +19,6 @@ end
 
 function play_state:update(dt)
     snake:update(dt)
-
 end
 
 function play_state:draw()
@@ -27,12 +26,4 @@ function play_state:draw()
     love.graphics.draw(testPic, 50, 50, 1, 1, 1, 0, 0);
 
     snake:draw()
-end
-
-function play_state:mousereleased(x, y, button)
-    if button == "wd" then
-        snake:rotateLeft()
-    elseif button == "wu" then
-        snake:rotateRight()
-    end
 end
