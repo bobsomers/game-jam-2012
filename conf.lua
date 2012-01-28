@@ -1,12 +1,14 @@
+local constants = require "constants"
+
 function love.conf(t)
    -- Game info.
-   t.title = "Planes on a Snake"
-   t.author = "CPGD"
+   t.title = constants.TITLE
+   t.author = constants.AUTHOR
 
    -- Graphic settings.
-   t.screen.width = 1024
-   t.screen.height = 768
+   t.screen.width = constants.SCREEN.x
+   t.screen.height = constants.SCREEN.y
 
    -- Debugging for now.
-   t.console = true
+   t.console = constants.DEBUG_MODE
 end

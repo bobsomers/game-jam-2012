@@ -1,15 +1,15 @@
+-- Require any needed modules.
 local Class = require "hump.class"
 local Vector = require "hump.vector"
+local constants = require "constants"
 
-Snake = Class(function(self)
-   self.position = Vector(1024 / 2, 768 / 2)
-   self.SPIN_RATE = 1.5
+-- Define the class (and constructor).
+local Snake = Class(function(self, image)
+   self.image = image
+   self.position = Vector(constants.SCREEN.x / 2, constants.SCREEN.y / 2)
+   self.SPIN_RATE = constants.SNAKE_SPIN_RATE
    self.rotation = 0
 end)
-
-function Snake:init()
-   self.image = love.graphics.newImage("tmpart/ring.png")
-end
 
 function Snake:update(dt)
    if love.keyboard.isDown("o") then
@@ -22,10 +22,10 @@ end
 
 function Snake:draw()
    love.graphics.draw(self.image,
-   self.position.x, self.position.y,
-   self.rotation,
-   1, 1,
-   100, 100)
+      self.position.x, self.position.y,
+      self.rotation,
+      1, 1,
+      self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
 function Snake:spinCW(dt)
@@ -35,3 +35,6 @@ end
 function Snake:spinCCW(dt)
    self.rotation = self.rotation - self.SPIN_RATE * dt
 end
+
+-- Used for idiomatic module loading.
+return Snake
