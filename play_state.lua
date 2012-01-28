@@ -1,4 +1,4 @@
-love.filesystem.load("Plane.lua")()
+love.filesystem.load("plane.lua")()
 Gamestate = require "hump.gamestate"
 local Vector =  require "hump.vector"
 
@@ -18,6 +18,8 @@ function play_state:init()
    p = Plane ("red", testPic, 350, 0, -10, 1); 
    p2 = Plane ("red", testPic, 400, 0, -15, 1.3); 
    p3 = Plane ("red", testPic, 450, 0, -20, -1); 
+
+   Bullet.init();
 end
 
 function play_state:enter(previous)
@@ -57,7 +59,7 @@ function play_state:mousereleased(x, y, button)
         snake:rotateRight()
     elseif button == "l" then
 	local bullet = Bullet();
-	bullet:fire(Vector(512, 512), Vector(0,1))
+	bullet:fire(Vector(512, 512), Vector(0,200))
 	table.insert(bullets, bullet)
     end
    
