@@ -6,4 +6,6 @@ function love.conf(t)
     -- Graphic settings.
     t.screen.width = 1024
     t.screen.height = 768
+
+    t.console = true
 end
