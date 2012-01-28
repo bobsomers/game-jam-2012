@@ -1,3 +1,4 @@
+love.filesystem.load("Plane.lua")()
 Gamestate = require "hump.gamestate"
 local Vector =  require "hump.vector"
 
@@ -9,11 +10,14 @@ local testPic = love.graphics.newImage("tmpart/plane.jpg");
 
 local snake = Snake()
 local bullets = {}    
-function play_state:init()
-    love.graphics.setBackgroundColor(255, 255, 255)
 
-    snake:init()
-  
+function play_state:init()
+   love.graphics.setBackgroundColor(255, 255, 255)
+
+   snake:init()
+   p = Plane ("red", testPic, 350, 0, -10, 1); 
+   p2 = Plane ("red", testPic, 400, 0, -15, 1.3); 
+   p3 = Plane ("red", testPic, 450, 0, -20, -1); 
 end
 
 function play_state:enter(previous)
@@ -22,12 +26,14 @@ end
 
 function play_state:update(dt)
     snake:update(dt)
-
+   p:update(dt)
+   p2:update(dt)
+   p3:update(dt)
     local i = 1
     for i=1, #bullets, i + 1 do
 	bullets[i]:update(dt)
     end 
-
+   
 end
 
 function play_state:draw()
@@ -35,7 +41,9 @@ function play_state:draw()
     love.graphics.draw(testPic, 50, 50, 1, 1, 1, 0, 0);
 
     snake:draw()
-
+    p:draw();
+    p2:draw();
+    p3:draw();
     local i = 1
     for i=1, #bullets, i + 1 do
 	bullets[i]:draw()
@@ -52,4 +60,6 @@ function play_state:mousereleased(x, y, button)
 	bullet:fire(Vector(512, 512), Vector(0,1))
 	table.insert(bullets, bullet)
     end
+   
 end
+

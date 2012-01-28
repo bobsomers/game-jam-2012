@@ -15,5 +15,5 @@ function menu_state:update(dt)
 end
 
 function menu_state:draw()
-    love.graphics.print("Menu state!", 100, 100)
+   love.graphics.print("Menu state!", 100, 100)
 end
