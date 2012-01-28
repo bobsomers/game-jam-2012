@@ -1,4 +1,2 @@
-# Global Game Jam 2012!!
+# Global Game Jam 2012!!!
 O:
-
-
