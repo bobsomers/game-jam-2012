@@ -1,8 +1,9 @@
 local Class = require "hump.class"
 local Vector = require "hump.vector"
+local Constants = require "constants"
 
 Bullet = Class(function(self)
-    self.position = Vector(1024 / 2, 768 / 2)
+    self.position = Vector(Constants.SCREEN.x / 2, Constants.SCREEN.y / 2)
     self.direction = Vector( 0, 1)
     --self.SPIN_RATE = 0.3
     self.rotation = 0
@@ -31,5 +32,3 @@ function Bullet:fire(startLocation, startdirection)
 	self.position = startLocation;
 	self.direction = startdirection;
 end
-
-
