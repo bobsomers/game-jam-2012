@@ -32,8 +32,12 @@ function play_state:update(dt)
    p2:update(dt)
    p3:update(dt)
     local i = 1
-    for i=1, #bullets, i + 1 do
-	bullets[i]:update(dt)
+    for i,bb in ipairs(bullets) do
+      --if bb.lifespan < 15 then
+	bb:update(dt)
+      --else
+	--table.remove(bullets,i)
+      --end
     end 
    
 end
