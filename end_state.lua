@@ -15,5 +15,5 @@ function end_state:update(dt)
 end
 
 function end_state:draw()
-    love.graphics.print("End state!", 100, 100)
+   love.graphics.print("End state!", 100, 100)
 end

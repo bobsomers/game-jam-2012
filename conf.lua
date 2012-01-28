@@ -1,11 +1,11 @@
 function love.conf(t)
-    -- Game info.
-    t.title = "Planes on a Snake"
-    t.author = "CPGD"
+   -- Game info.
+   t.title = "Planes on a Snake"
+   t.author = "CPGD"
 
-    -- Graphic settings.
-    t.screen.width = 1024
-    t.screen.height = 768
+   -- Graphic settings.
+   t.screen.width = 1024
+   t.screen.height = 768
 
-    t.console = true
+   t.console = true
 end
