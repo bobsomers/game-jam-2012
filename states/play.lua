@@ -27,7 +27,7 @@ local bullets = {}
 -- Initialize the state. Called once when it's first created.
 function play:init()
    -- White is a nice background color.
-   love.graphics.setBackgroundColor(255, 255, 255)
+   love.graphics.setBackgroundColor(30, 80, 255)
 
    -- Create the snake.
    snake = Snake(love.graphics.newImage("tmpart/ring.png"))
@@ -40,6 +40,7 @@ function play:init()
    
    -- Prep the plane image. 
    plane_image = love.graphics.newImage("tmpart/plane.jpg")
+   planes.trail = love.graphics.newImage("fx/particle.png")
 end
 
 -- Called when this state is entered with the previous state.
@@ -56,7 +57,7 @@ function play:update(dt)
          -- Spawn a plane with the plane image, make sure it's off the screen,
          -- give it a random theta (radial location), and random
          -- r and theta speeds.
-         table.insert(planes, Plane(plane_image, constants.SCREEN.x / 1.8, math.random(1,6), math.random(-20, -20), math.random(-100, 100) / 50))
+         table.insert(planes, Plane(plane_image, planes.trail, constants.SCREEN.x / 1.8, math.random(1,6), math.random(-20, -20), math.random(-100, 100) / 50))
       end
    end
 
