@@ -6,6 +6,14 @@ local Plane = require "entities.plane"
 local Player = require "entities.player"
 local Bullet = require "entities.bullet"
 local constants = require "constants"
+-- Start off with 0 planes in the game.
+numPlanes = 0
+-- Start off wanting 1 plane in the game.
+numPlanesToHave = 1
+-- Load the image for the plane once. 
+plane_image = love.graphics.newImage("tmpart/plane.jpg")
+-- Seed the random number generator
+math.randomseed(1234)
 
 -- TODO
 --love.filesystem.load("bullet.lua")()
@@ -31,12 +39,6 @@ function play:init()
    -- Create the player.
    player = Player(love.graphics.newImage("tmpart/jamsackson.png"))
 
-   -- Create some planes.
-   planes.image = love.graphics.newImage("tmpart/plane.jpg")
-   table.insert(planes, Plane(planes.image, "red", 350, 0, -10, 1))
-   table.insert(planes, Plane(planes.image, "red", 400, 0, -15, 1))
-   table.insert(planes, Plane(planes.image, "red", 450, 0, -20, -1))
-
    -- Prep the bullet image.
    bullets.image = love.graphics.newImage("tmpart/bullet.png")
 end
@@ -48,6 +50,20 @@ end
 
 -- Called when this state is updated.
 function play:update(dt)
+   print("numplanes"..numPlanes)
+   print("numplanesToHave"..numPlanesToHave)
+   -- For each plane that's missing, let's give a 5% chance to craete it.
+   for i = numPlanes, numPlanesToHave do
+      if (math.random(1,100) <= 1) then 
+         table.insert(planes, Plane(plane_image, "red", 350, 0, -10, 1))
+      end
+   end
+
+   if (math.random(1,100) == 1) then
+      numPlanesToHave = numPlanesToHave + 1
+   end
+
+   -- Update all objects that need to be updated
    snake:update(dt)
    player:update(dt)
    for i, plane in ipairs(planes) do

@@ -20,6 +20,7 @@ local Plane = Class(function(self, image, color, r, theta, rSpeed, thetaSpeed)
    self.rSpeed = rSpeed
    self.thetaSpeed = thetaSpeed
    self.health = constants.PLANE_HEALTH
+   numPlanes = numPlanes + 1
 end)
 
 function Plane:update(dt)
@@ -67,6 +68,10 @@ function Plane:draw()
    facing, 1,
    self.images[self.level]:getWidth() / 2, self.images[self.level]:getHeight() / 2)
    ]]
+end
+
+function Plane:destroy()
+   numPlanes = numPlanes - 1
 end
 
 -- Used for idiomatic module loading.
