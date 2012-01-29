@@ -260,7 +260,7 @@ function play:draw()
       plane:draw()
    end
 
-   snake:draw()
+   snake:draw(snakeHealth)
 
    player:draw()
 
