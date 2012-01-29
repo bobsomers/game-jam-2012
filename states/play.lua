@@ -141,8 +141,10 @@ function play:update(dt)
             thetaSpeed = thetaSpeed * -1
          end
 
+         local rSpeed = math.random(-21, -12)
+
          table.insert(planes, Plane(color, planeImages[color], planes.trail,
-          constants.SCREEN.x / 1.9, math.random(1,6), math.random(-21, -12),
+          constants.SCREEN.x / 1.9, math.random(1,6), rSpeed,
           thetaSpeed))
       end
    end
@@ -176,10 +178,16 @@ function play:update(dt)
          if distance < constants.BULLET_RADIUS + constants.PLANE_RADIUS then
             -- If the plane is destroyed by this bullet, then remove it and the bullet
             local died, matched = plane:getShot(bullet)
+
+            if matched == false then
+               sound.smallExplosion()
+            end
+
             if died then
                if matched then
                   table.insert(booms, Explosion(booms.image, plane_position, plane.color))
                   table.insert(chainwaves, ChainWave(chain_font, plane_position, plane.color))
+                  sound.bigExplosion()
                else
                   table.insert(poofs, Poof(poofs.image, plane_position))
                end
@@ -190,10 +198,17 @@ function play:update(dt)
       end
    end
 
+   local minPlaneDist = 99999;
+
    -- Collision detection between planes and snake!
    for i, plane in ipairs(planes) do
       local plane_position = plane.position + center
       local distance = (plane_position - snake.position):len()
+
+      if (plane.r - constants.SNAKE_RADIUS) < minPlaneDist then
+         minPlaneDist = plane.r - constants.SNAKE_RADIUS
+      end
+
       -- BULLET_RADIUS because it's small. Plane would be too big.
       if distance < constants.BULLET_RADIUS + constants.SNAKE_RADIUS then
          plane:crashIntoSnake()
@@ -203,6 +218,8 @@ function play:update(dt)
          table.remove(planes,i)
       end
    end
+
+   -- sound.warningBeep(minPlaneDist)
 
    if (snakeHealth <= 0) then
       Gamestate.switch(gameover)
@@ -301,6 +318,7 @@ function play:mousepressed(x, y, button)
          (direction * player.SIZE.y)
       table.insert(bullets, Bullet(bullets.images, location, direction,
          snake:getCurrentColor(player.theta)))
+      sound.bulletFire()
    end
 end
 
