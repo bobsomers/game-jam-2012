@@ -63,6 +63,25 @@ function Plane:draw()
       self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
+-- What happens when a plane is shot by a bullet?
+-- Return true if the plane was destroyed by this bullet, false otherwise.
+function Plane:getShot(bullet)
+   -- If the colors match up, then apply more damage
+   if (self.color == bullet.color) then
+      self.health = self.health - constants.BULLET_MATCHING_COLOR_DAMAGE
+   else
+      self.health = self.health - constants.BULLET_NOT_MATCHING_COLOR_DAMAGE
+   end
+   -- Return true if the plane died from this shot
+   if (self.health <= 0) then
+      -- Destroy the plane and let the play state know that the ship was destroyed.
+      self:destroy()
+      return true
+   end
+   -- Otherwise return false
+   return false
+end
+
 function Plane:destroy()
    numPlanes = numPlanes - 1
    numPlanesToHave = numPlanesToHave -1

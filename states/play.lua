@@ -43,7 +43,8 @@ function play:init()
    -- Prep the bullet image.
    bullets.image = love.graphics.newImage("tmpart/bullet.png")
    
-   -- Prep the plane image. 
+   -- Prep the plane image and trail image. 
+   -- TODO: Marc, conditionalize the following line:
    plane_image = love.graphics.newImage("tmpart/plane.jpg")
    planes.trail = love.graphics.newImage("fx/particle.png")
 
@@ -95,10 +96,13 @@ function play:update(dt)
          local plane_position = plane.position + center
          local distance = (plane_position - bullet.position):len()
          if distance < constants.BULLET_RADIUS + constants.PLANE_RADIUS then
+            -- Make an explosion
             table.insert(booms, Explosion(booms.image, plane_position))
-            plane:destroy()
-            table.remove(planes, j)
-            table.remove(bullets, i)
+            -- If the plane is destroyed by this bullet, then remove it and the bullet
+            if (plane:getShot(bullet)) then
+               table.remove(planes, j)
+               table.remove(bullets, i)
+            end
          end
       end
    end
