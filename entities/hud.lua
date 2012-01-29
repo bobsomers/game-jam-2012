@@ -17,7 +17,9 @@ function Hud:draw(snakehealth, score)
    tLevel = constants.SCREEN.y-80   --text level, the y level for the text
    love.graphics.setColor(255,255,255);
    love.graphics.print("Score: "..score, 100, tLevel, 0, 2, 2);
-   love.graphics.setColor(255,255,255)
+   love.graphics.print("Snake Life: "..snakeHealth, 300, tLevel, 0, 2, 2);
+  
+   love.graphics.setColor(255,255,255) --put graphics back the way you left it
 end
 
 -- idiomatic module loadinf
