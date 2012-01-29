@@ -33,21 +33,27 @@ constants.PLAYER_SPIN_RATE = 1.5
 constants.SNAKE_SPIN_RATE = 0.25
 
 -- The maximum amount of health the snake can have.
-constants.MAX_SNAKE_HEALTH = 100
-
--- The amount of health the snake currently has.
-constants.SNAKE_CURRENT_HEALTH = 100
+constants.SNAKE_MAX_HEALTH = 100
 
 -- How fast do bullets travel?
 constants.BULLET_SPEED = 250
 
+-- How big is a bullet?
+constants.BULLET_SIZE = Vector(10, 10)
+
+-- How much damage is dealt when the bullet and plane's colors match?
+constants.BULLET_MATCHING_COLOR_DAMAGE = 100
+
+-- How much damage is dealt when the bullet and plane have different colors?
+constants.BULLET_NOT_MATCHING_COLOR_DAMAGE = 20
+
 -- For collision detection purposes...
-constants.BULLET_RADIUS = 5
+constants.BULLET_RADIUS = constants.BULLET_SIZE.x / 2
 constants.PLANE_RADIUS = 25
 constants.SNAKE_RADIUS = 110
 
 -- What are the possible colors for enemies?
-constants.ENEMY_COLORS = {"yellow", "blue", "red", "green"}
+constants.ENEMY_COLORS = {"red", "green", "yellow", "blue"}
 
 -- Integer  %. What chance is there per game update to increase the maximum
 -- allowed # of enemies in the game.
