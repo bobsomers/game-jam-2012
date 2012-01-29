@@ -21,12 +21,12 @@ end)
 function Player:update(dt)
    self.time = self.time + dt
    self.moving = false
-   if love.keyboard.isDown("a") then
+   if (love.keyboard.isDown("a") or love.keyboard.isDown("left")) then
       self.theta = self.theta - self.SPIN_RATE * dt
       self.moving = true
       self.facing = 1
    end
-   if love.keyboard.isDown("d") then
+   if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
       self.theta = self.theta + self.SPIN_RATE * dt
       self.moving = true
       self.facing = -1

@@ -59,6 +59,10 @@ constants.ENEMY_COLORS = {"red", "green", "yellow", "blue"}
 -- allowed # of enemies in the game.
 constants.INCREASE_MAX_ENEMY_COUNT_CHANCE = 1;
 
+-- Integer %. What chance is there when a plane is destroyed to decrease the
+-- maximum allowed # of enemies in the game.
+constants.DECREASE_MAX_ENEMY_COUNT_CHANCE = 50;
+
 -- Integer %. What chance is there per game update to spawn a new enemy that
 -- is currently missing from the game.
 constants.SPAWN_ENEMY_CHANCE = 1;

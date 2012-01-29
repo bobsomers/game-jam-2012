@@ -287,10 +287,12 @@ end
 
 function play:mousepressed(x, y, button)
    if button == "wd" then
-      snake:spinCW()
+      -- Double the spin effect if it came from the mouse.
+      snake:spinCW(1)
    end
    if button == "wu" then
-      snake:spinCCW()
+      -- Double the spin effect if it came from the mouse.
+      snake:spinCCW(1)
    end
 
    if button == "l" then
