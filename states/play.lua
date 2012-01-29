@@ -151,9 +151,6 @@ function play:update(dt)
       numPlanesToHave = numPlanesToHave + 1
    end
 
-   print("numPlanes is "..numPlanes)
-   print("numPlanesToHave is "..numPlanesToHave)
-
    -- Update all objects that need to be updated
    snake:update(dt)
    player:update(dt)
@@ -181,6 +178,7 @@ function play:update(dt)
                   table.insert(booms, Explosion(booms.image, plane_position, plane.color))
                   table.insert(chainwaves, ChainWave(chain_font, plane_position, plane.color))
                else
+                  score = score + 10
                   table.insert(poofs, Poof(poofs.image, plane_position))
                end
                table.remove(planes, j)

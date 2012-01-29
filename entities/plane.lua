@@ -85,7 +85,7 @@ function Plane:getShot(bullet)
    if (self.health <= 0) then
       -- Destroy the plane and let the play state know that the ship was destroyed.
       self:destroy()
-      score = score + 10
+      score = score + 100 * multiplier
       died = true
    end
 
