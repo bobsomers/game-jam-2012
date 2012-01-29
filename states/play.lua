@@ -1,6 +1,7 @@
 -- Require any needed modules.
 local Gamestate = require "hump.gamestate"
 local Vector =  require "hump.vector"
+local Camera = require "hump.camera"
 local Snake = require "entities.snake"
 local Plane = require "entities.plane"
 local Player = require "entities.player"
@@ -9,6 +10,7 @@ local Background = require "fx.background"
 local Explosion = require "fx.explosion"
 local Poof = require "fx.poof"
 local FireJet = require "fx.fire_jet"
+local Earthquake = require "fx.earthquake"
 local constants = require "constants"
 local gameover = require "states.gameover"
 local Hud = require "entities.hud"
@@ -40,11 +42,17 @@ local background = {}
 local hud = {}
 local planeImages = {}
 local playerImages = {}
+local camera = {}
+local earthquake = {}
 
 -- Initialize the state. Called once when it's first created.
 function play:init()
+   -- Camera is looking at the center of the window.
+   camera = Camera(constants.CENTER:clone(), 1, 0)
+   earthquake = Earthquake(camera)
+
    -- Load the background.
-   background = Background()
+   background = Background(camera)
 
    -- Create the snake.
    snake = Snake(love.graphics.newImage("Assets/Oroboroussmall.png"))
@@ -104,6 +112,7 @@ end
 function play:update(dt)
    local center = constants.SCREEN / 2
 
+   earthquake:update(dt)
    background:update(dt)
 
    -- For each plane that's missing, let's give a 5% chance to create it.
@@ -165,6 +174,7 @@ function play:update(dt)
       local distance = (plane_position - snake.position):len()
       if distance < constants.BULLET_RADIUS + constants.SNAKE_RADIUS then
          plane:crashIntoSnake()
+         earthquake:shake(constants.CAMERA_SHAKE)
          table.insert(firejets, FireJet(firejets.image, plane_position))
          table.remove(planes,i)
       end
@@ -226,6 +236,7 @@ function play:draw()
       poof:draw()
    end
 
+   camera:detach()
    hud:draw(snakeHealth,score)   
 end
 

@@ -1,10 +1,11 @@
 -- Require any needed modules.
 local Class = require "hump.class"
 local Vector = require "hump.vector"
+local Camera = require "hump.camera"
 local constants = require "constants"
 
 -- Define the class (and constructor).
-local Background = Class(function(self)
+local Background = Class(function(self, camera)
    self.plate = love.graphics.newImage("Assets/GGJ_Background.png")
    self.clouds = {
       {
@@ -28,6 +29,7 @@ local Background = Class(function(self)
       love.graphics.newImage("Assets/GGJ_Background_star2.png")
    }
    self.time = 0
+   self.camera = camera
 end)
 
 function Background:update(dt)
@@ -42,6 +44,7 @@ function Background:draw()
    for i, star in ipairs(self.stars) do
       love.graphics.draw(star, 0, 0)
    end
+   self.camera:attach()
    for i, cloud in ipairs(self.clouds) do
       love.graphics.draw(cloud.image,
          constants.CENTER.x, constants.CENTER.y,

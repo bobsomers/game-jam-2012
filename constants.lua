@@ -63,5 +63,8 @@ constants.INCREASE_MAX_ENEMY_COUNT_CHANCE = 1;
 -- is currently missing from the game.
 constants.SPAWN_ENEMY_CHANCE = 1;
 
+-- Magnitude of camera shake.
+constants.CAMERA_SHAKE = 25
+
 -- Used for idiomatic module loading.
 return constants
