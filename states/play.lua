@@ -88,16 +88,22 @@ function play:update(dt)
 
    background:update(dt)
 
-   -- For each plane that's missing, let's give a 5% chance to craete it.
+   -- For each plane that's missing, let's give a 5% chance to create it.
    for i = numPlanes, numPlanesToHave do
       if (math.random(1,100) <= constants.SPAWN_ENEMY_CHANCE) then 
          -- Spawn a plane with a random color (and appropriate image),
          -- make sure it's off the screen, give it a random theta (radial location),
          -- and random r and theta speeds.
          local color = constants.ENEMY_COLORS[math.random(1, #constants.ENEMY_COLORS)]
+         -- Generate the thetaSpeed
+         local thetaSpeed = math.random(10, 90) / 120 
+         if (math.random(1,2) == 1) then
+            thetaSpeed = thetaSpeed * -1
+         end
+
          table.insert(planes, Plane(color, planeImages[color], planes.trail,
           constants.SCREEN.x / 1.8, math.random(1,6), math.random(-20, -10),
-          math.random(-100, 100) / 120))
+          thetaSpeed))
       end
    end
 
