@@ -21,6 +21,11 @@ local Plane = Class(function(self, color, image, particleImage, r, theta, rSpeed
    self.theta = theta
    self.rSpeed = rSpeed
    self.thetaSpeed = thetaSpeed
+   if self.thetaSpeed < 0 then
+      self.facing = -1
+   else
+      self.facing = 1
+   end
    self.health = constants.PLANE_HEALTH
    self.position = utils.polarToCartesian(self.r, self.theta)
    self.trail = JetTrail(particleImage, self)
@@ -39,18 +44,8 @@ end
 function Plane:draw()
    self.trail:draw()
 
-   -- We'll "scale" our image on the Y axis by either +1 or -1, depending on
-   -- which way the plane needs to be facing to look in his direction of travel.
-   local facing = 1
-   if self.thetaSpeed < 0 then
-      facing = -1
-   end
-
-   local centerX = constants.SCREEN.x / 2
-   local centerY = constants.SCREEN.y / 2
-
-   local drawX = centerX + self.position.x
-   local drawY = centerY + self.position.y
+   local drawX = constants.CENTER.x + self.position.x
+   local drawY = constants.CENTER.y + self.position.y
 
    local scale = 0.4
 
@@ -69,7 +64,7 @@ function Plane:draw()
    love.graphics.draw(image,
       drawX, drawY,
       self.theta + (math.pi / 2),
-      facing * scale, scale,
+      self.facing * scale, scale,
       image:getWidth() / 2, image:getHeight() / 2)
 end
 
