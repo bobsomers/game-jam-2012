@@ -12,10 +12,11 @@ local utils = require "utils"
 -- @param   theta       the angle, in radians
 -- @param   rSpeed      the radial speed of descent
 -- @param   thetaSpeed  the angular speed at which the plane travels (+ is ccw)
-local Plane = Class(function(self, image, particleImage, r, theta, rSpeed, thetaSpeed)
+local Plane = Class(function(self, color, image, particleImage, r, theta, rSpeed, thetaSpeed)
+   self.time = 0
    self.image = image
    -- Generate a random color for this enemy
-   self.color = constants.ENEMY_COLORS[math.random(1,4)];
+   self.color = color
    self.r = r
    self.theta = theta
    self.rSpeed = rSpeed
@@ -28,6 +29,7 @@ end)
 
 function Plane:update(dt)
    -- Update the radius and theta
+   self.time = self.time + dt
    self.r = self.r + (dt * self.rSpeed)
    self.theta = self.theta + (dt * self.thetaSpeed)
    self.position = utils.polarToCartesian(self.r, self.theta)
@@ -50,17 +52,25 @@ function Plane:draw()
    local drawX = centerX + self.position.x
    local drawY = centerY + self.position.y
 
-   local scale = 0.1
+   local scale = 0.4
+
+   local image = {}
+
+   if self.color == "red" then
+      image = self.image[math.floor(self.time * 10) % 2 + 1]
+   else
+      image = self.image
+   end
 
    -- Draw the plane at position (coordinate.x, coordinate.y) with no rotation,
    -- 1.0 scale on the X axis and "facing" scale on the Y axis, 
    -- and defining the center of our plane to be in the center of the image.
    --(image, x, y, rotation, scaleX, scaleY, originOffsetX, originOffsetY)
-   love.graphics.draw(self.image,
+   love.graphics.draw(image,
       drawX, drawY,
-      self.theta,
-      scale, scale * facing,
-      self.image:getWidth() / 2, self.image:getHeight() / 2)
+      self.theta + (math.pi / 2),
+      facing * scale, scale,
+      image:getWidth() / 2, image:getHeight() / 2)
 end
 
 -- What happens when a plane is shot by a bullet?
