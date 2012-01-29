@@ -66,5 +66,8 @@ constants.SPAWN_ENEMY_CHANCE = 1;
 -- Magnitude of camera shake.
 constants.CAMERA_SHAKE = 25
 
+-- Growth rate of chain wave (in radius pixels per second).
+constants.CHAIN_WAVE_GROWTH_RATE = 150
+
 -- Used for idiomatic module loading.
 return constants

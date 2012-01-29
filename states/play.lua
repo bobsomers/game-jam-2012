@@ -14,9 +14,11 @@ local Earthquake = require "fx.earthquake"
 local constants = require "constants"
 local Hud = require "entities.hud"
 local sound = require "sound"
+local ChainWave = require "entities.chain_wave"
 
--- The player's score
+-- The player's score and multiplier
 score = 0
+multiplier = 1
 -- The snake should start with its max health
 snakeHealth = constants.SNAKE_MAX_HEALTH
 -- Start off with 0 planes in the game.
@@ -44,12 +46,17 @@ local planeImages = {}
 local playerImages = {}
 local camera = {}
 local earthquake = {}
+local chainwaves = {}
+local awesomes = {}
+local chain_font = {}
 
 -- Initialize the state. Called once when it's first created.
 function play:init()
    -- Camera is looking at the center of the window.
    camera = Camera(constants.CENTER:clone(), 1, 0)
    earthquake = Earthquake(camera)
+
+   chain_font = love.graphics.newFont("fonts/white_rabbit.ttf", 96)
 
    -- Load the background.
    background = Background(camera)
@@ -165,6 +172,7 @@ function play:update(dt)
             if died then
                if matched then
                   table.insert(booms, Explosion(booms.image, plane_position))
+                  table.insert(chainwaves, ChainWave(chain_font, plane_position, plane.color))
                else
                   table.insert(poofs, Poof(poofs.image, plane_position))
                end
@@ -213,6 +221,23 @@ function play:update(dt)
          table.remove(firejets, i)
       end
    end
+   for i, chainwave in ipairs(chainwaves) do
+      if chainwave.active then
+         chainwave:update(dt, planes, booms, awesomes, chainwaves)
+      else
+         table.remove(chainwaves, i)
+         if #chainwaves <= 0 then
+            multiplier = 1
+         end
+      end
+   end
+   for i, awesome in ipairs(awesomes) do
+      if awesome.active then
+         awesome:update(dt)
+      else
+         table.remove(awesomes, i)
+      end
+   end
 
 end
 
@@ -241,6 +266,12 @@ function play:draw()
    end
    for i, poof in ipairs(poofs) do
       poof:draw()
+   end
+   for i, chainwave in ipairs(chainwaves) do
+      chainwave:draw()
+   end
+   for i, awesome in ipairs(awesomes) do
+      awesome:draw()
    end
 
    camera:detach()
