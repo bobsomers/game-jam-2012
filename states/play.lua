@@ -8,6 +8,7 @@ local Bullet = require "entities.bullet"
 local Background = require "fx.background"
 local Explosion = require "fx.explosion"
 local Poof = require "fx.poof"
+local FireJet = require "fx.fire_jet"
 local constants = require "constants"
 local gameover = require "states.gameover"
 local Hud = require "entities.hud"
@@ -34,6 +35,7 @@ local planes = {}
 local bullets = {}
 local booms = {}
 local poofs = {}
+local firejets = {}
 local background = {}
 local hud = {}
 local planeImages = {}
@@ -84,6 +86,7 @@ function play:init()
    -- Prep the effects.
    booms.image = love.graphics.newImage("fx/particle.png")
    poofs.image = love.graphics.newImage("fx/particle.png")
+   firejets.image = love.graphics.newImage("fx/particle.png")
 
    hud = Hud()
 end
@@ -162,6 +165,7 @@ function play:update(dt)
       local distance = (plane_position - snake.position):len()
       if distance < constants.BULLET_RADIUS + constants.SNAKE_RADIUS then
          plane:crashIntoSnake()
+         table.insert(firejets, FireJet(firejets.image, plane_position))
          table.remove(planes,i)
       end
    end
@@ -185,19 +189,36 @@ function play:update(dt)
          table.remove(poofs, i)
       end
    end
+   for i, firejet in ipairs(firejets) do
+      if firejet.active then
+         firejet:update(dt)
+      else
+         table.remove(firejets, i)
+      end
+   end
+
 end
 
 -- Called when this state is drawn.
 function play:draw()
    background:draw()
-   snake:draw()
-   player:draw()
+
+   for i, firejet in ipairs(firejets) do
+      firejet:draw()
+   end
+
    for i, plane in ipairs(planes) do
       plane:draw()
    end
+
+   snake:draw()
+
+   player:draw()
+
    for i, bullet in ipairs(bullets) do
       bullet:draw()
    end
+
    for i, boom in ipairs(booms) do
       boom:draw()
    end

@@ -49,7 +49,7 @@ constants.BULLET_NOT_MATCHING_COLOR_DAMAGE = 20
 
 -- For collision detection purposes...
 constants.BULLET_RADIUS = constants.BULLET_SIZE.x / 2
-constants.PLANE_RADIUS = 25
+constants.PLANE_RADIUS = 50
 constants.SNAKE_RADIUS = 110
 
 -- What are the possible colors for enemies?
