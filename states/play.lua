@@ -176,7 +176,7 @@ function play:draw()
       poof:draw()
    end
 
-   hud:draw(0,score)   
+   hud:draw(snakeHealth,score)   
 end
 
 function play:mousepressed(x, y, button)
