@@ -1,6 +1,7 @@
 -- Require any needed modules.
 local Class = require "hump.class"
 local Vector = require "hump.vector"
+local JetTrail = require "fx/jet_trail.lua"
 local constants = require "constants"
 local utils = require "utils"
 
@@ -11,7 +12,7 @@ local utils = require "utils"
 -- @param   theta       the angle, in radians
 -- @param   rSpeed      the radial speed of descent
 -- @param   thetaSpeed  the angular speed at which the plane travels (+ is ccw)
-local Plane = Class(function(self, image, r, theta, rSpeed, thetaSpeed)
+local Plane = Class(function(self, image, particleImage, r, theta, rSpeed, thetaSpeed)
    self.image = image
    -- Generate a random color for this enemy
    self.color = constants.ENEMY_COLORS[math.random(1,4)];
@@ -21,6 +22,7 @@ local Plane = Class(function(self, image, r, theta, rSpeed, thetaSpeed)
    self.thetaSpeed = thetaSpeed
    self.health = constants.PLANE_HEALTH
    self.position = utils.polarToCartesian(self.r, self.theta)
+   self.trail = JetTrail(particleImage, self)
    numPlanes = numPlanes + 1
 end)
 
@@ -29,9 +31,12 @@ function Plane:update(dt)
    self.r = self.r + (dt * self.rSpeed)
    self.theta = self.theta + (dt * self.thetaSpeed)
    self.position = utils.polarToCartesian(self.r, self.theta)
+   self.trail:update(dt)
 end
 
 function Plane:draw()
+   self.trail:draw()
+
    -- We'll "scale" our image on the Y axis by either +1 or -1, depending on
    -- which way the plane needs to be facing to look in his direction of travel.
    local facing = 1
@@ -61,6 +66,7 @@ end
 function Plane:destroy()
    numPlanes = numPlanes - 1
    numPlanesToHave = numPlanesToHave -1
+   self.trail = nil
 end
 
 function Plane:crashIntoSnake()

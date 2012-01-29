@@ -12,6 +12,7 @@ constants.AUTHOR = "CPGD"
 
 -- The screen dimensions.
 constants.SCREEN = Vector(1024, 768)
+constants.CENTER = constants.SCREEN / 2
 
 -- Are we in debug mode?
 constants.DEBUG_MODE = true
