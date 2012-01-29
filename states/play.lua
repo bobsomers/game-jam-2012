@@ -36,6 +36,7 @@ local booms = {}
 local poofs = {}
 local background = {}
 local hud = {}
+local planeImages = {}
 
 -- Initialize the state. Called once when it's first created.
 function play:init()
@@ -51,9 +52,14 @@ function play:init()
    -- Prep the bullet image.
    bullets.image = love.graphics.newImage("tmpart/bullet.png")
    
-   -- Prep the plane image and trail image. 
-   -- TODO: Marc, conditionalize the following line:
-   plane_image = love.graphics.newImage("tmpart/plane.jpg")
+   -- Prep the plane images and trail image. 
+   planeImages["yellow"] = love.graphics.newImage("Assets/yellowPlane.png")
+   planeImages["blue"] = love.graphics.newImage("Assets/bluePlane.png")
+   planeImages["red"] = {
+      love.graphics.newImage("Assets/redplane_frame0.png"),
+      love.graphics.newImage("Assets/redplane_frame1.png")}
+   planeImages["green"] = love.graphics.newImage("Assets/greenPlane.png")
+
    planes.trail = love.graphics.newImage("fx/particle.png")
 
    -- Prep the effects.
@@ -77,10 +83,13 @@ function play:update(dt)
    -- For each plane that's missing, let's give a 5% chance to craete it.
    for i = numPlanes, numPlanesToHave do
       if (math.random(1,100) <= constants.SPAWN_ENEMY_CHANCE) then 
-         -- Spawn a plane with the plane image, make sure it's off the screen,
-         -- give it a random theta (radial location), and random
-         -- r and theta speeds.
-         table.insert(planes, Plane(plane_image, planes.trail, constants.SCREEN.x / 1.8, math.random(1,6), math.random(-20, -10), math.random(-100, 100) / 120))
+         -- Spawn a plane with a random color (and appropriate image),
+         -- make sure it's off the screen, give it a random theta (radial location),
+         -- and random r and theta speeds.
+         local color = constants.ENEMY_COLORS[math.random(1, #constants.ENEMY_COLORS)]
+         table.insert(planes, Plane(color, planeImages[color], planes.trail,
+          constants.SCREEN.x / 1.8, math.random(1,6), math.random(-20, -10),
+          math.random(-100, 100) / 120))
       end
    end
 
