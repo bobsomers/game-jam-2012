@@ -38,11 +38,13 @@ function ChainWave:update(dt, planes, booms, awesomes, chainwaves)
 end
 
 function ChainWave:draw()
+   --[[
    if constants.DEBUG_MODE then
       love.graphics.setColor(255, 0, 255)
       love.graphics.circle("line", self.position.x, self.position.y, self.radius)
       love.graphics.setColor(255, 255, 255)
    end
+   --]]
 end
 
 return ChainWave
