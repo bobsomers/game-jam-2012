@@ -147,6 +147,7 @@ function play:update(dt)
       end
    end
 
+   -- Give a low chance per update to increase the maximum allowed # of planes
    if (math.random(1,100) <= constants.INCREASE_MAX_ENEMY_COUNT_CHANCE) then
       numPlanesToHave = numPlanesToHave + 1
    end
