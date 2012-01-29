@@ -6,7 +6,7 @@ local walks = {}
 -- Load all sounds here. Call only once
 function sound.init() 
    music = {
-      menu = love.audio.newSource("sounds/menu.mp3", "stream"),
+      menu = love.audio.newSource("sounds/menu.ogg", "stream"),
       game = love.audio.newSource("sounds/music.ogg", "stream")
    }
    music.menu:setLooping(true)
