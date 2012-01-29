@@ -6,6 +6,7 @@ local Plane = require "entities.plane"
 local Player = require "entities.player"
 local Bullet = require "entities.bullet"
 local Explosion = require "fx.explosion"
+local Poof = require "fx.poof"
 local constants = require "constants"
 local gameover = require "states.gameover"
 
@@ -26,6 +27,7 @@ local player = {}
 local planes = {}
 local bullets = {}
 local booms = {}
+local poofs = {}
 
 -- Initialize the state. Called once when it's first created.
 function play:init()
@@ -45,8 +47,9 @@ function play:init()
    plane_image = love.graphics.newImage("tmpart/plane.jpg")
    planes.trail = love.graphics.newImage("fx/particle.png")
 
-   -- Prep the explosions.
+   -- Prep the effects.
    booms.image = love.graphics.newImage("fx/particle.png")
+   poofs.image = love.graphics.newImage("fx/particle.png")
 end
 
 -- Called when this state is entered with the previous state.
@@ -114,12 +117,19 @@ function play:update(dt)
       Gamestate.switch(gameover)
    end
 
-   -- Explosions go boom!
+   -- Update the effects.
    for i, boom in ipairs(booms) do
       if boom.active then
          boom:update(dt)
       else
          table.remove(booms, i)
+      end
+   end
+   for i, poof in ipairs(poofs) do
+      if poof.active then
+         poof:update(dt)
+      else
+         table.remove(poofs, i)
       end
    end
 end
@@ -136,6 +146,9 @@ function play:draw()
    end
    for i, boom in ipairs(booms) do
       boom:draw()
+   end
+   for i, poof in ipairs(poofs) do
+      poof:draw()
    end
 end
 
@@ -154,6 +167,10 @@ function play:mousepressed(x, y, button)
    end
    if button == "wu" then
       snake:spinCCW()
+   end
+
+   if button == "r" then
+      table.insert(poofs, Poof(poofs.image, Vector(200, 200)))
    end
 
    if button == "l" then
