@@ -72,7 +72,7 @@ end
 
 function Plane:destroy()
    numPlanes = numPlanes - 1
-   numPlanesToHave = numPlanestoHave -1
+   numPlanesToHave = numPlanesToHave -1
 end
 
 -- Used for idiomatic module loading.
