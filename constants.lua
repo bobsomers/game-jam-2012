@@ -38,6 +38,9 @@ constants.SNAKE_MAX_HEALTH = 100
 -- How fast do bullets travel?
 constants.BULLET_SPEED = 250
 
+-- How big is a bullet?
+constants.BULLET_SIZE = Vector(10, 10)
+
 -- How much damage is dealt when the bullet and plane's colors match?
 constants.BULLET_MATCHING_COLOR_DAMAGE = 100
 
@@ -45,7 +48,7 @@ constants.BULLET_MATCHING_COLOR_DAMAGE = 100
 constants.BULLET_NOT_MATCHING_COLOR_DAMAGE = 20
 
 -- For collision detection purposes...
-constants.BULLET_RADIUS = 5
+constants.BULLET_RADIUS = constants.BULLET_SIZE.x / 2
 constants.PLANE_RADIUS = 25
 constants.SNAKE_RADIUS = 110
 

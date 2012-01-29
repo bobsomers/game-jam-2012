@@ -49,8 +49,16 @@ function play:init()
    -- Create the player.
    player = Player(love.graphics.newImage("tmpart/jamsackson.png"))
 
-   -- Prep the bullet image.
-   bullets.image = love.graphics.newImage("tmpart/bullet.png")
+   -- Prep the bullet frames.
+   bullets.images = {
+      love.graphics.newImage("Assets/bullet_frame0.png"),
+      love.graphics.newImage("Assets/bullet_frame1.png"),
+      love.graphics.newImage("Assets/bullet_frame2.png"),
+      love.graphics.newImage("Assets/bullet_frame3.png"),
+      love.graphics.newImage("Assets/bullet_frame4.png"),
+      love.graphics.newImage("Assets/bullet_frame5.png"),
+      love.graphics.newImage("Assets/bullet_frame6.png")
+   }
    
    -- Prep the plane images and trail image. 
    planeImages["yellow"] = love.graphics.newImage("Assets/yellowPlane.png")
@@ -191,7 +199,7 @@ function play:mousepressed(x, y, button)
       local direction = player.position:normalized()
       local location = (constants.SCREEN / 2) + player.position +
          (direction * player.SIZE.y)
-      table.insert(bullets, Bullet(bullets.image, location, direction,
+      table.insert(bullets, Bullet(bullets.images, location, direction,
          snake:getCurrentColor(player.theta)))
    end
 end
