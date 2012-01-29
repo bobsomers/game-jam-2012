@@ -74,6 +74,8 @@ function menu:draw()
 
 --   love.graphics.draw(logo.image, constants.CENTER.x-300, 100)
    love.graphics.draw(logo.image, logo.position.x, logo.position.y)
+
+   love.graphics.print("Click to Shoot, scroll wheel to spin, WASD to walk", 20, constants.SCREEN.y-100, 0, .4,.4)
 end
 
 function menu:keypressed()
