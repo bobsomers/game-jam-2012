@@ -1,35 +1,34 @@
-
 local Class = require "hump.class"
 local constants = require "constants"
 
-local boxLeft = love.graphics.newImage("Assets/HUDbox_left.png");
-local boxRight = love.graphics.newImage("Assets/HUDbox_right.png");
-
-local Hud = Class(function()
+local Hud = Class(function(self)
+   self.images = {
+      left = love.graphics.newImage("Assets/HUDbox_left.png"),
+      right = love.graphics.newImage("Assets/HUDbox_right.png")
+   }
+   self.fonts = {
+      title = love.graphics.newFont("Assets/Defused.ttf", 24),
+      score = love.graphics.newFont("Assets/WhiteRabbit.ttf", 56)
+   }
 end)
-
-function Hud:load()
-end
 
 function Hud:update(dt)
 end
 
 function Hud:draw(snakehealth, score)
+   love.graphics.draw(self.images.left, 0, constants.SCREEN.y - 100)
+   love.graphics.draw(self.images.right,
+      constants.SCREEN.x - 300, constants.SCREEN.y - 100)
 
+   love.graphics.setFont(self.fonts.title)
+   love.graphics.setColor(255, 255, 255)
 
-   --love.graphics.setColor(0,0,0)
-   --love.graphics.rectangle("fill" , 0, constants.SCREEN.y-100, constants.SCREEN.x, 100)
-   love.graphics.draw(boxLeft, 0, constants.SCREEN.y-100 )
-   love.graphics.draw(boxRight, constants.SCREEN.x-300, constants.SCREEN.y-100 )  
+   love.graphics.print("SCORE", 65, constants.SCREEN.y - 80)
+   love.graphics.print("HEALTH", constants.SCREEN.x - 175, constants.SCREEN.y - 80)
 
-   tLevel = constants.SCREEN.y-50   --text level, the y level for the text
-   love.graphics.setColor(255,255,255);
-   love.graphics.print("Score: "..score, 100, tLevel, 0, 2, 2);
-   love.graphics.print("Snake Life: "..snakeHealth, constants.SCREEN.x- 250, tLevel, 0, 2, 2);
+   love.graphics.setFont(self.fonts.score)
 
-   
-  
-   love.graphics.setColor(255,255,255) --put graphics back the way you left it
+   love.graphics.print(string.format("%06d", score), 50, constants.SCREEN.y - 45)
 end
 
 -- idiomatic module loadinf
