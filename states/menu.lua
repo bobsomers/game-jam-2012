@@ -2,6 +2,7 @@
 local Gamestate = require "hump.gamestate"
 local Vector = require "hump.vector"
 local constants = require "constants"
+local sound = require "sound"
 
 -- Create the game state.
 local menu = Gamestate.new()
@@ -89,10 +90,12 @@ function menu:draw()
 end
 
 function menu:keypressed()
+   sound.motherfuckin()
    Gamestate.switch(play)
 end
 
 function menu:mousepressed()
+   sound.motherfuckin()
    Gamestate.switch(play)
 end
 
