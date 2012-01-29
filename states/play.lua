@@ -148,17 +148,14 @@ end
 -- Called when this state is drawn.
 function play:draw()
    background:draw()
-
    snake:draw()
    player:draw()
-
    for i, plane in ipairs(planes) do
       plane:draw()
    end
    for i, bullet in ipairs(bullets) do
       bullet:draw()
    end
-
    for i, boom in ipairs(booms) do
       boom:draw()
    end
@@ -167,19 +164,6 @@ function play:draw()
    end
 
    hud.draw()   
-end
-
-function play:keypressed(key)
-   if key == " " then
-      local direction = player.position:normalized()
-      local location = (constants.SCREEN / 2) + player.position +
-         (direction * player.SIZE.y)
-      table.insert(bullets, Bullet(bullets.image, location, direction))
-   end
-
-   if key == "f" then
-      print(love.timer.getFPS())
-   end
 end
 
 function play:mousepressed(x, y, button)
