@@ -77,19 +77,23 @@ end
 -- Return true if the plane was destroyed by this bullet, false otherwise.
 function Plane:getShot(bullet)
    -- If the colors match up, then apply more damage
+   local matched = false
    if (self.color == bullet.color) then
       self.health = self.health - constants.BULLET_MATCHING_COLOR_DAMAGE
+      matched = true
    else
       self.health = self.health - constants.BULLET_NOT_MATCHING_COLOR_DAMAGE
    end
-   -- Return true if the plane died from this shot
+
+   -- Did the plane die from this shot?
+   local died = false
    if (self.health <= 0) then
       -- Destroy the plane and let the play state know that the ship was destroyed.
       self:destroy()
-      return true
+      died = true
    end
-   -- Otherwise return false
-   return false
+
+   return died, matched
 end
 
 function Plane:destroy()

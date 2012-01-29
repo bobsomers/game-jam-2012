@@ -159,8 +159,13 @@ function play:update(dt)
          local distance = (plane_position - bullet.position):len()
          if distance < constants.BULLET_RADIUS + constants.PLANE_RADIUS then
             -- If the plane is destroyed by this bullet, then remove it and the bullet
-            if (plane:getShot(bullet)) then
-               table.insert(booms, Explosion(booms.image, plane_position))
+            local died, matched = plane:getShot(bullet)
+            if died then
+               if matched then
+                  table.insert(booms, Explosion(booms.image, plane_position))
+               else
+                  table.insert(poofs, Poof(poofs.image, plane_position))
+               end
                table.remove(planes, j)
             end
                table.remove(bullets, i)
