@@ -56,22 +56,15 @@ function Plane:draw()
       self.theta,
       scale, scale * facing,
       self.image:getWidth() / 2, self.image:getHeight() / 2)
-
-   --[[
-   -- Draw the enemy at position (x, y) with no rotation, 1.0 scale on the Y
-   -- axis and "facing" scale on the X axis, and defining the center of our
-   -- enemy to be in the center of the image.
-   love.graphics.draw(self.images[self.level],
-   self.position.x, self.position.y,
-   0,
-   facing, 1,
-   self.images[self.level]:getWidth() / 2, self.images[self.level]:getHeight() / 2)
-   ]]
 end
 
 function Plane:destroy()
    numPlanes = numPlanes - 1
    numPlanesToHave = numPlanesToHave -1
+end
+
+function Plane:crashIntoSnake()
+   self:destroy()
 end
 
 -- Used for idiomatic module loading.

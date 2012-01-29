@@ -37,6 +37,7 @@ constants.BULLET_SPEED = 250
 -- For collision detection purposes...
 constants.BULLET_RADIUS = 5
 constants.PLANE_RADIUS = 25
+constants.SNAKE_RADIUS = 110
 
 -- What are the possible colors for enemies?
 constants.ENEMY_COLORS = {"red", "green", "blue", "yellow"}
