@@ -31,11 +31,40 @@ function Snake:draw()
 end
 
 function Snake:spinCW()
-   self.rotation = self.rotation + constants.SNAKE_SPIN_RATE
+   self.rotation = (self.rotation + constants.SNAKE_SPIN_RATE)
 end
 
 function Snake:spinCCW()
-   self.rotation = self.rotation - constants.SNAKE_SPIN_RATE
+   self.rotation = (self.rotation - constants.SNAKE_SPIN_RATE)
+end
+
+function Snake:getCurrentColor(playerRotation)
+   -- Rotations between -2pi and 2pi
+   local playerRotationNormal = playerRotation % (math.pi * 2)
+   local snakeRotationNormal = self.rotation % (math.pi * 2)
+
+   if playerRotationNormal < 0 then
+      playerRotationNormal = playerRotationNormal + (math.pi * 2)
+   end
+
+   if snakeRotationNormal < 0 then
+      snakeRotationNormal = snakeRotationNormal + (math.pi * 2)
+   end
+   -- Rotations around 0 and 2pi
+
+   -- Position of player in respect to the snake (-2pi to 2pi)
+   local difference = playerRotationNormal - snakeRotationNormal
+
+   if difference < 0 then
+      difference = difference + (math.pi * 2)
+   end
+   -- Now from 0 to 2pi
+
+   -- Now from 0 to 1.0
+   local percentage = difference / (math.pi * 2)
+   local section = percentage * #constants.ENEMY_COLORS
+
+   return constants.ENEMY_COLORS[math.ceil(section)]
 end
 
 -- Replaced with other ones for mousewheel
