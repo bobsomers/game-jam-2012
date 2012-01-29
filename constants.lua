@@ -29,7 +29,7 @@ constants.PLAYER_SIZE = Vector(20, 40)
 constants.PLAYER_SPIN_RATE = 1.5
 
 -- How fast does the snake spin?
-constants.SNAKE_SPIN_RATE = 1.5
+constants.SNAKE_SPIN_RATE = 0.25
 
 -- How fast do bullets travel?
 constants.BULLET_SPEED = 250

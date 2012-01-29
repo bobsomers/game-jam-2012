@@ -113,5 +113,21 @@ function play:keypressed(key)
    end
 end
 
+function play:mousepressed(x, y, button)
+   if button == "wd" then
+      snake:spinCW()
+   end
+   if button == "wu" then
+      snake:spinCCW()
+   end
+
+   if button == "l" then
+      local direction = player.position:normalized()
+      local location = (constants.SCREEN / 2) + player.position +
+         (direction * player.SIZE.y)
+      table.insert(bullets, Bullet(bullets.image, location, direction))
+   end
+end
+
 -- Used for idiomatic module loading.
 return play

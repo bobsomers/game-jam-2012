@@ -7,17 +7,17 @@ local constants = require "constants"
 local Snake = Class(function(self, image)
    self.image = image
    self.position = Vector(constants.SCREEN.x / 2, constants.SCREEN.y / 2)
-   self.SPIN_RATE = constants.SNAKE_SPIN_RATE
    self.rotation = 0
 end)
 
 function Snake:update(dt)
-   if love.keyboard.isDown("left") then
-      self:spinCCW(dt)
-   end
-   if love.keyboard.isDown("right") then
-      self:spinCW(dt)
-   end
+   -- Replaced with mousewheel
+   --if love.keyboard.isDown("left") then
+   --   self:spinCCW(dt)
+   --end
+   --if love.keyboard.isDown("right") then
+   --   self:spinCW(dt)
+   --end
 end
 
 function Snake:draw()
@@ -28,13 +28,22 @@ function Snake:draw()
       self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
-function Snake:spinCW(dt)
-   self.rotation = self.rotation + self.SPIN_RATE * dt
+function Snake:spinCW()
+   self.rotation = self.rotation + constants.SNAKE_SPIN_RATE
 end
 
-function Snake:spinCCW(dt)
-   self.rotation = self.rotation - self.SPIN_RATE * dt
+function Snake:spinCCW()
+   self.rotation = self.rotation - constants.SNAKE_SPIN_RATE
 end
+
+-- Replaced with other ones for mousewheel
+--function Snake:spinCW(dt)
+--   self.rotation = self.rotation + self.SPIN_RATE * dt
+--end
+--
+--function Snake:spinCCW(dt)
+--   self.rotation = self.rotation - self.SPIN_RATE * dt
+--end
 
 -- Used for idiomatic module loading.
 return Snake
