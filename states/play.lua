@@ -184,10 +184,6 @@ function play:mousepressed(x, y, button)
       snake:spinCCW()
    end
 
-   if button == "r" then
-      table.insert(booms, Explosion(booms.image, Vector(200, 200)))
-   end
-
    if button == "l" then
       local direction = player.position:normalized()
       local location = (constants.SCREEN / 2) + player.position +
