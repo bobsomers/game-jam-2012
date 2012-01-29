@@ -3,6 +3,11 @@ local Class = require "hump.class"
 local Vector = require "hump.vector"
 local constants = require "constants"
 
+local life80 = love.graphics.newImage("images/oroborous_life80.png");
+local life60 = love.graphics.newImage("images/oroborous_life60.png");
+local life40 = love.graphics.newImage("images/oroborous_life40.png");
+local life20 = love.graphics.newImage("images/oroborous_life20.png");
+
 -- Define the class (and constructor).
 local Snake = Class(function(self, image)
    self.image = image
@@ -22,13 +27,32 @@ function Snake:update(dt)
    --end
 end
 
-function Snake:draw()
+function Snake:draw(snakeHealth)
    local snakeSize = 0.5
    love.graphics.draw(self.image,
       self.position.x, self.position.y,
       self.rotation,
       snakeSize, snakeSize,
       self.image:getWidth() / 2, self.image:getHeight() / 2)
+
+   if snakeHealth < 81 then
+      love.graphics.draw(life80, self.position.x, self.position.y, self.rotation, snakeSize, snakeSize, life80:getWidth()/2, life80:getHeight()/2)   
+   end
+
+   if snakeHealth < 61 then
+      love.graphics.draw(life60, self.position.x, self.position.y, self.rotation, snakeSize, snakeSize, life60:getWidth()/2, life60:getHeight()/2)   
+   end
+
+   if snakeHealth < 41 then
+      love.graphics.draw(life40, self.position.x, self.position.y, self.rotation, snakeSize, snakeSize, life40:getWidth()/2, life40:getHeight()/2)   
+   end
+
+   if snakeHealth < 21 then
+      love.graphics.draw(life20, self.position.x, self.position.y, self.rotation, snakeSize, snakeSize, life20:getWidth()/2, life20:getHeight()/2)   
+   end
+
+
+
 end
 
 function Snake:spinCW()
