@@ -7,7 +7,7 @@ local walks = {}
 function sound.init() 
    music = {
       menu = love.audio.newSource("sounds/menu.mp3", "stream"),
-      game = love.audio.newSource("sounds/music.mp3", "stream")
+      game = love.audio.newSource("sounds/music.ogg", "stream")
    }
    music.menu:setLooping(true)
    music.game:setLooping(true)

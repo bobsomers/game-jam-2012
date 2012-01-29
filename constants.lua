@@ -45,7 +45,7 @@ constants.BULLET_SIZE = Vector(10, 10)
 constants.BULLET_MATCHING_COLOR_DAMAGE = 100
 
 -- How much damage is dealt when the bullet and plane have different colors?
-constants.BULLET_NOT_MATCHING_COLOR_DAMAGE = 10
+constants.BULLET_NOT_MATCHING_COLOR_DAMAGE = 8
 
 -- For collision detection purposes...
 constants.BULLET_RADIUS = constants.BULLET_SIZE.x / 2
@@ -58,6 +58,10 @@ constants.ENEMY_COLORS = {"red", "green", "yellow", "blue"}
 -- Integer  %. What chance is there per game update to increase the maximum
 -- allowed # of enemies in the game.
 constants.INCREASE_MAX_ENEMY_COUNT_CHANCE = 1;
+
+-- Integer %. What chance is there when a plane is destroyed to decrease the
+-- maximum allowed # of enemies in the game.
+constants.DECREASE_MAX_ENEMY_COUNT_CHANCE = 50;
 
 -- Integer %. What chance is there per game update to spawn a new enemy that
 -- is currently missing from the game.

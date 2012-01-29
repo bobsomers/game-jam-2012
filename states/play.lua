@@ -142,7 +142,7 @@ function play:update(dt)
          end
 
          table.insert(planes, Plane(color, planeImages[color], planes.trail,
-          constants.SCREEN.x / 1.8, math.random(1,6), math.random(-20, -10),
+          constants.SCREEN.x / 1.9, math.random(1,6), math.random(-21, -12),
           thetaSpeed))
       end
    end
@@ -287,10 +287,12 @@ end
 
 function play:mousepressed(x, y, button)
    if button == "wd" then
-      snake:spinCW()
+      -- Double the spin effect if it came from the mouse.
+      snake:spinCW(1)
    end
    if button == "wu" then
-      snake:spinCCW()
+      -- Double the spin effect if it came from the mouse.
+      snake:spinCCW(1)
    end
 
    if button == "l" then

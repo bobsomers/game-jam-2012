@@ -18,13 +18,16 @@ local Snake = Class(function(self, image)
 end)
 
 function Snake:update(dt)
-   -- Replaced with mousewheel
-   --if love.keyboard.isDown("left") then
-   --   self:spinCCW(dt)
-   --end
-   --if love.keyboard.isDown("right") then
-   --   self:spinCW(dt)
-   --end
+   -- Pressing "w" or "up" on the keyboard should spin the snake CW.
+   -- Pressing "s" or "down" on the keyboard should spin the snake CCW.
+   if (love.keyboard.isDown("w") or love.keyboard.isDown("up")) then
+      -- Spin a fair bit slower than it normally would. 
+      self:spinCW(0.55)
+   end
+   if (love.keyboard.isDown("s") or love.keyboard.isDown("down")) then
+      -- Spin a fair bit slower than it normally would. 
+      self:spinCCW(0.55)
+   end
 end
 
 function Snake:draw(snakeHealth)
@@ -55,12 +58,12 @@ function Snake:draw(snakeHealth)
 
 end
 
-function Snake:spinCW()
-   self.rotation = (self.rotation + constants.SNAKE_SPIN_RATE)
+function Snake:spinCW(multiplier)
+   self.rotation = (self.rotation + constants.SNAKE_SPIN_RATE * multiplier)
 end
 
-function Snake:spinCCW()
-   self.rotation = (self.rotation - constants.SNAKE_SPIN_RATE)
+function Snake:spinCCW(multiplier)
+   self.rotation = (self.rotation - constants.SNAKE_SPIN_RATE * multiplier)
 end
 
 function Snake:getCurrentColor(playerRotation)
@@ -93,11 +96,11 @@ function Snake:getCurrentColor(playerRotation)
 end
 
 -- Replaced with other ones for mousewheel
---function Snake:spinCW(dt)
+--function Snake:spinCW()
 --   self.rotation = self.rotation + self.SPIN_RATE * dt
 --end
 --
---function Snake:spinCCW(dt)
+--function Snake:spinCCW()
 --   self.rotation = self.rotation - self.SPIN_RATE * dt
 --end
 

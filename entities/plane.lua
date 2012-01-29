@@ -94,8 +94,8 @@ end
 
 function Plane:destroy()
    numPlanes = numPlanes - 1
-   -- Give a 2/3 chance of decreasing the max # of planes the game should have
-   if (math.random(1,100) < 66) then
+   -- Give a chance of decreasing the max # of planes the game should have
+   if (math.random(1,100) < constants.DECREASE_MAX_ENEMY_COUNT_CHANCE) then
       numPlanesToHave = numPlanesToHave -1
    end
    self.trail = nil
