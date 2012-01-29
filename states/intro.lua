@@ -2,7 +2,6 @@
 local Gamestate = require "hump.gamestate"
 local Vector = require "hump.vector"
 local constants = require "constants"
-local menu = require "states.menu"
 
 -- Create the game state.
 local intro = Gamestate.new()

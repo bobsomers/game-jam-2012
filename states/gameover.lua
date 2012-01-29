@@ -1,7 +1,6 @@
 -- Require any needed modules.
 local Gamestate = require "hump.gamestate"
 local constants = require "constants"
---local play = require "states.play"
 
 local background = love.graphics.newImage("Assets/menuBackground.png")
 local goLogo = love.graphics.newImage("Assets/GameOver.png")
@@ -37,11 +36,11 @@ end
 
 function gameover:keypressed()
    --play = Gamestate.new()  
-   Gamestate.switch(menu)
+--   Gamestate.switch(menu)
 end
 
 function gameover:mousepressed()
-   Gamestate.switch(menu)
+--   Gamestate.switch(menu)
 end
 -- Used for idiomatic module loading.
 return gameover

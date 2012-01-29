@@ -12,7 +12,6 @@ local Poof = require "fx.poof"
 local FireJet = require "fx.fire_jet"
 local Earthquake = require "fx.earthquake"
 local constants = require "constants"
-local gameover = require "states.gameover"
 local Hud = require "entities.hud"
 
 -- The player's score
