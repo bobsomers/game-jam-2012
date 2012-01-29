@@ -23,10 +23,11 @@ function Snake:update(dt)
 end
 
 function Snake:draw()
+   local snakeSize = 0.5
    love.graphics.draw(self.image,
       self.position.x, self.position.y,
       self.rotation,
-      1, 1,
+      snakeSize, snakeSize,
       self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
