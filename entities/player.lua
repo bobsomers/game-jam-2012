@@ -3,6 +3,7 @@ local Class = require "hump.class"
 local Vector = require "hump.vector"
 local constants = require "constants"
 local utils = require "utils"
+local sound = require "sound"
 
 -- Define the class (and constructor).
 local Player = Class(function(self, images)
@@ -31,6 +32,10 @@ function Player:update(dt)
       self.facing = -1
    end
    self.position = utils.polarToCartesian(self.RADIUS, self.theta)
+
+   if self.moving then
+      sound.walk(dt)
+   end
 end
 
 function Player:draw()

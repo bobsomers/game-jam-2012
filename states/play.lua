@@ -13,6 +13,7 @@ local FireJet = require "fx.fire_jet"
 local Earthquake = require "fx.earthquake"
 local constants = require "constants"
 local Hud = require "entities.hud"
+local sound = require "sound"
 
 -- The player's score
 score = 0
@@ -100,9 +101,11 @@ end
 
 -- Called when this state is entered with the previous state.
 function play:enter(previous)
-   --print("Just entered play state")
    snakeHealth = constants.SNAKE_MAX_HEALTH
    score = 0
+
+   sound.playMusic()
+
    --planes = {}  --resetting planes breaks the game for some reason
    --bullets = {}
 end

@@ -2,6 +2,7 @@
 local Gamestate = require "hump.gamestate"
 local Vector = require "hump.vector"
 local constants = require "constants"
+local sound = require "sound"
 
 -- Create the game state.
 local intro = Gamestate.new()
@@ -68,6 +69,7 @@ end
 -- Called when this state is entered with the previous state.
 function intro:enter(previous)
    time = 0
+   sound.playMenu()
 end
 
 -- Called when this state is updated.
