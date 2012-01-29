@@ -31,5 +31,8 @@ constants.PLAYER_SPIN_RATE = 1.5
 -- How fast does the snake spin?
 constants.SNAKE_SPIN_RATE = 1.5
 
+-- How fast do bullets travel?
+constants.BULLET_SPEED = 150
+
 -- Used for idiomatic module loading.
 return constants
