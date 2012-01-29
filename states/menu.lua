@@ -24,7 +24,7 @@ end
 
 -- Called when this state is updated.
 function menu:update(dt)
-   rotation = (rotation + dt) % 360
+   rotation = (rotation + .1*dt) % 360
 
 end
 
@@ -32,7 +32,7 @@ end
 function menu:draw()
    --love.graphics.print("Menu state!", 100, 100)
    love.graphics.draw(background, 0,0)
-   love.graphics.draw(oro, 0,0, rotation)
+   love.graphics.draw(oro, constants.CENTER.x ,constants.CENTER.y, rotation, 1,1, 512, 512 )
    love.graphics.draw(menuPlane,0,0)
    love.graphics.draw(logo, constants.CENTER.x-300, 100)
 end

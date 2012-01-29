@@ -90,7 +90,11 @@ end
 
 -- Called when this state is entered with the previous state.
 function play:enter(previous)
-   print("Just entered play state")
+   --print("Just entered play state")
+   snakeHealth = constants.SNAKE_MAX_HEALTH
+   score = 0
+   --planes = {}  --resetting planes breaks the game for some reason
+   --bullets = {}
 end
 
 -- Called when this state is updated.
