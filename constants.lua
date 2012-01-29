@@ -38,5 +38,16 @@ constants.BULLET_SPEED = 150
 constants.BULLET_RADIUS = 5
 constants.PLANE_RADIUS = 25
 
+-- What are the possible colors for enemies?
+constants.ENEMY_COLORS = {"red", "green", "blue", "yellow"}
+
+-- Integer  %. What chance is there per game update to increase the maximum
+-- allowed # of enemies in the game.
+constants.INCREASE_MAX_ENEMY_COUNT_CHANCE = 1;
+
+-- Integer %. What chance is there per game update to spawn a new enemy that
+-- is currently missing from the game.
+constants.SPAWN_ENEMY_CHANCE = 1;
+
 -- Used for idiomatic module loading.
 return constants

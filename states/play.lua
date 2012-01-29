@@ -11,10 +11,8 @@ local constants = require "constants"
 numPlanes = 0
 -- Start off wanting 1 plane in the game.
 numPlanesToHave = 1
--- Load the image for the plane once. 
-plane_image = love.graphics.newImage("tmpart/plane.jpg")
--- Seed the random number generator
-math.randomseed(1234)
+-- Seed the random number generator based on the system time
+math.randomseed(os.time())
 
 -- Create the game state.
 local play = Gamestate.new()
@@ -39,11 +37,13 @@ function play:init()
 
    -- Prep the bullet image.
    bullets.image = love.graphics.newImage("tmpart/bullet.png")
+   
+   -- Prep the plane image. 
+   plane_image = love.graphics.newImage("tmpart/plane.jpg")
 end
 
 -- Called when this state is entered with the previous state.
 function play:enter(previous)
-
 end
 
 -- Called when this state is updated.
@@ -52,12 +52,15 @@ function play:update(dt)
 
    -- For each plane that's missing, let's give a 5% chance to craete it.
    for i = numPlanes, numPlanesToHave do
-      if (math.random(1,100) <= 1) then 
-         table.insert(planes, Plane(plane_image, "red", 350, 0, -10, 1))
+      if (math.random(1,100) <= constants.SPAWN_ENEMY_CHANCE) then 
+         -- Spawn a plane with the plane image, make sure it's off the screen,
+         -- give it a random theta (radial location), and random
+         -- r and theta speeds.
+         table.insert(planes, Plane(plane_image, constants.SCREEN.x / 1.8, math.random(1,6), math.random(-20, -10), math.random(-100, 100) / 100))
       end
    end
 
-   if (math.random(1,100) == 1) then
+   if (math.random(1,100) <= constants.INCREASE_MAX_ENEMY_COUNT_CHANCE) then
       numPlanesToHave = numPlanesToHave + 1
    end
 

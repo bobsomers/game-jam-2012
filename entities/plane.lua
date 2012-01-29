@@ -7,14 +7,14 @@ local utils = require "utils"
 -- Define the class (and constructor).
 --
 -- @param   image       already loaded image to use for the plane
--- @param   color       color of the plane
 -- @param   r           how far the plane should start from the center, in px
 -- @param   theta       the angle, in radians
 -- @param   rSpeed      the radial speed of descent
 -- @param   thetaSpeed  the angular speed at which the plane travels (+ is ccw)
-local Plane = Class(function(self, image, color, r, theta, rSpeed, thetaSpeed)
+local Plane = Class(function(self, image, r, theta, rSpeed, thetaSpeed)
    self.image = image
-   self.color = color
+   -- Generate a random color for this enemy
+   self.color = constants.ENEMY_COLORS[math.random(1,4)];
    self.r = r
    self.theta = theta
    self.rSpeed = rSpeed
@@ -72,6 +72,7 @@ end
 
 function Plane:destroy()
    numPlanes = numPlanes - 1
+   numPlanesToHave = numPlanestoHave -1
 end
 
 -- Used for idiomatic module loading.
