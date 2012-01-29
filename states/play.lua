@@ -5,6 +5,7 @@ local Snake = require "entities.snake"
 local Plane = require "entities.plane"
 local Player = require "entities.player"
 local Bullet = require "entities.bullet"
+local Explosion = require "fx.explosion"
 local constants = require "constants"
 local gameover = require "states.gameover"
 
@@ -24,6 +25,7 @@ local snake = {}
 local player = {}
 local planes = {}
 local bullets = {}
+local booms = {}
 
 -- Initialize the state. Called once when it's first created.
 function play:init()
@@ -42,6 +44,9 @@ function play:init()
    -- Prep the plane image. 
    plane_image = love.graphics.newImage("tmpart/plane.jpg")
    planes.trail = love.graphics.newImage("fx/particle.png")
+
+   -- Prep the explosions.
+   booms.image = love.graphics.newImage("fx/particle.png")
 end
 
 -- Called when this state is entered with the previous state.
@@ -87,6 +92,7 @@ function play:update(dt)
          local plane_position = plane.position + center
          local distance = (plane_position - bullet.position):len()
          if distance < constants.BULLET_RADIUS + constants.PLANE_RADIUS then
+            table.insert(booms, Explosion(booms.image, plane_position))
             plane:destroy()
             table.remove(planes, j)
             table.remove(bullets, i)
@@ -107,6 +113,15 @@ function play:update(dt)
    if (constants.SNAKE_CURRENT_HEALTH <= 0) then
       Gamestate.switch(gameover)
    end
+
+   -- Explosions go boom!
+   for i, boom in ipairs(booms) do
+      if boom.active then
+         boom:update(dt)
+      else
+         table.remove(booms, i)
+      end
+   end
 end
 
 -- Called when this state is drawn.
@@ -118,6 +133,9 @@ function play:draw()
    end
    for i, bullet in ipairs(bullets) do
       bullet:draw()
+   end
+   for i, boom in ipairs(booms) do
+      boom:draw()
    end
 end
 
