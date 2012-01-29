@@ -22,7 +22,6 @@ function Bullet:update(dt)
 end
 
 function Bullet:draw()
-   -- TODO: make these constants somewhere?
    if self.color == "red" then
       love.graphics.setColor(255, 100, 100, 255)
    elseif self.color == "blue" then
@@ -33,7 +32,7 @@ function Bullet:draw()
       love.graphics.setColor(0, 255, 0, 255)
    end
 
-   local image = self.images[math.floor(self.time * 30) % 2 + 1]
+   local image = self.images[math.floor(self.time * 20) % 7 + 1]
 
    love.graphics.draw(image,
       self.position.x, self.position.y,
