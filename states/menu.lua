@@ -8,7 +8,7 @@ local sound = require "sound"
 local menu = Gamestate.new()
 
 local spring_k = 0.4
-local friction = 0.9
+local friction = 0.85
 local background = {}
 local menuPlane = {}
 local logo = {}
@@ -38,6 +38,11 @@ function menu:init()
       rotation = 0,
       velocity = Vector(0, 0)
    }
+
+   instructions = {
+      position = Vector(0, 800),
+      velocity = Vector(0, 0)
+   }
 end
 
 -- Called when this state is entered with the previous state.
@@ -59,6 +64,7 @@ function menu:update(dt)
    spring(menuPlane, Vector(0, 0))
    spring(logo, Vector(constants.CENTER.x - 300, 100))
    spring(oro, constants.CENTER:clone())
+   spring(instructions, Vector(0, constants.SCREEN.y - 150))
 end
 
 -- Called when this state is drawn.
@@ -73,10 +79,14 @@ function menu:draw()
 
    love.graphics.draw(menuPlane.image, menuPlane.position.x, menuPlane.position.y)
 
---   love.graphics.draw(logo.image, constants.CENTER.x-300, 100)
    love.graphics.draw(logo.image, logo.position.x, logo.position.y)
 
-   love.graphics.print("Click to Shoot, scroll wheel to spin, WASD to walk", 20, constants.SCREEN.y-100, 0, .4,.4)
+   love.graphics.print("Shoot: click or spacebar",
+      instructions.position.x + 20, instructions.position.y, 0, .4,.4)
+   love.graphics.print("Spin: scroll wheel or keyboard W & S ",
+      instructions.position.x + 20, instructions.position.y + 50, 0, .4,.4)
+   love.graphics.print("Walk: keyboard A & D",
+      instructions.position.x + 20, instructions.position.y + 100, 0, .4,.4)
 end
 
 function menu:keypressed()

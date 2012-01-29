@@ -23,9 +23,11 @@ function ChainWave:update(dt, planes, booms, awesomes, chainwaves)
          local distance = (self.position - plane_position):len()
          if distance < constants.PLANE_RADIUS + self.radius then
             -- Chain wave caught a plane!
+            multiplier = multiplier + 1
+            score = score + 100 * multiplier
+            plane:destroy()
             table.remove(planes, i)
             table.insert(booms, Explosion(booms.image, plane_position, self.color))
-            multiplier = multiplier + 1
             table.insert(awesomes, Awesome(self.font, multiplier, plane_position))
             table.insert(chainwaves, ChainWave(self.font, plane_position, self.color))
          end

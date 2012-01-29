@@ -85,7 +85,7 @@ function Plane:getShot(bullet)
    if (self.health <= 0) then
       -- Destroy the plane and let the play state know that the ship was destroyed.
       self:destroy()
-      score = score + 10
+      score = score + 100 * multiplier
       died = true
    end
 
@@ -94,8 +94,14 @@ end
 
 function Plane:destroy()
    numPlanes = numPlanes - 1
-   -- Give a 40% chance of decreasing the max # of planes the game should have
-   if (math.random(1,100) < 40) then
+   numPlanesDestroyed = numPlanesDestroyed + 1
+   -- If the player has destroyed another 15 planes, make the game a bit harder
+   if (numPlanesDestroyed % 15 == 1) then
+      numPlanesDestroyedDifficultyMultipier = numPlanesDestroyedDifficultyMultiplier + 0.1
+   end
+
+   -- Give a chance of decreasing the max # of planes the game should have
+   if (math.random(1,100) < constants.DECREASE_MAX_ENEMY_COUNT_CHANCE) then
       numPlanesToHave = numPlanesToHave -1
    end
    self.trail = nil

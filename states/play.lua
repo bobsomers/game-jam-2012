@@ -16,15 +16,19 @@ local Hud = require "entities.hud"
 local sound = require "sound"
 local ChainWave = require "entities.chain_wave"
 
--- The player's score and multiplier
+-- The player's score and multiplier.
 score = 0
 multiplier = 1
--- The snake should start with its max health
+-- The snake should start with its max health.
 snakeHealth = constants.SNAKE_MAX_HEALTH
 -- Start off with 0 planes in the game.
 numPlanes = 0
 -- Start off wanting 1 plane in the game.
 numPlanesToHave = 1
+-- The number of planes that the player has destroyed so far.
+numPlanesDestroyed = 0
+-- Start at 1, and get harder by 0.1 for every 15 planes destroyed.
+numPlanesDestroyedDifficultyMultiplier = 1
 -- Seed the random number generator based on the system time
 math.randomseed(os.time())
 
@@ -145,16 +149,14 @@ function play:update(dt)
 
          table.insert(planes, Plane(color, planeImages[color], planes.trail,
           constants.SCREEN.x / 1.9, math.random(1,6), rSpeed,
-          thetaSpeed))
+          thetaSpeed * numPlanesDestroyedDifficultyMultiplier))
       end
    end
 
-   if (math.random(1,100) <= constants.INCREASE_MAX_ENEMY_COUNT_CHANCE) then
+   -- Give a low chance per update to increase the maximum allowed # of planes
+   if (math.random(1,100) <= constants.INCREASE_MAX_ENEMY_COUNT_CHANCE * numPlanesDestroyedDifficultyMultiplier) then
       numPlanesToHave = numPlanesToHave + 1
    end
-
-   print("numPlanes is "..numPlanes)
-   print("numPlanesToHave is "..numPlanesToHave)
 
    -- Update all objects that need to be updated
    snake:update(dt)
@@ -189,6 +191,7 @@ function play:update(dt)
                   table.insert(chainwaves, ChainWave(chain_font, plane_position, plane.color))
                   sound.bigExplosion()
                else
+                  score = score + 10
                   table.insert(poofs, Poof(poofs.image, plane_position))
                end
                table.remove(planes, j)
@@ -222,7 +225,7 @@ function play:update(dt)
    -- sound.warningBeep(minPlaneDist)
 
    if (snakeHealth <= 0) then
-      Gamestate.switch(gameover)
+      Gamestate.switch(gameover, hud, planes, score)
    end
 
    -- Update the effects.
@@ -306,10 +309,12 @@ end
 
 function play:mousepressed(x, y, button)
    if button == "wd" then
-      snake:spinCW()
+      -- Double the spin effect if it came from the mouse.
+      snake:spinCW(1)
    end
    if button == "wu" then
-      snake:spinCCW()
+      -- Double the spin effect if it came from the mouse.
+      snake:spinCCW(1)
    end
 
    if button == "l" then
