@@ -8,6 +8,8 @@ local Snake = Class(function(self, image)
    self.image = image
    self.position = Vector(constants.SCREEN.x / 2, constants.SCREEN.y / 2)
    self.rotation = 0
+   -- Reset the snake's health to its max.
+   constants.SNAKE_CURRENTH_HEALTH = constants.MAX_SNAKE_HEALTH
 end)
 
 function Snake:update(dt)

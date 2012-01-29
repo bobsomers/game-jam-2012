@@ -65,6 +65,7 @@ end
 
 function Plane:crashIntoSnake()
    self:destroy()
+   constants.SNAKE_CURRENT_HEALTH = constants.SNAKE_CURRENT_HEALTH - 20
 end
 
 -- Used for idiomatic module loading.

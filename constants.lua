@@ -31,6 +31,12 @@ constants.PLAYER_SPIN_RATE = 1.5
 -- How fast does the snake spin?
 constants.SNAKE_SPIN_RATE = 0.25
 
+-- The maximum amount of health the snake can have.
+constants.MAX_SNAKE_HEALTH = 100
+
+-- The amount of health the snake currently has.
+constants.SNAKE_CURRENT_HEALTH = 100
+
 -- How fast do bullets travel?
 constants.BULLET_SPEED = 250
 

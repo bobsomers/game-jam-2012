@@ -1,5 +1,6 @@
 -- Require any needed modules.
 local Gamestate = require "hump.gamestate"
+--local play = require "states.play"
 
 -- Create the game state.
 local gameover = Gamestate.new()
@@ -16,7 +17,9 @@ end
 
 -- Called when this state is updated.
 function gameover:update(dt)
-
+   print("Got to gameover state!")
+   play = Gamestate.new()
+   Gamestate.switch(play);
 end
 
 -- Called when this state is drawn.

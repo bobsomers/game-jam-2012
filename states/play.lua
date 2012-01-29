@@ -6,6 +6,7 @@ local Plane = require "entities.plane"
 local Player = require "entities.player"
 local Bullet = require "entities.bullet"
 local constants = require "constants"
+local gameover = require "states.gameover"
 
 -- Start off with 0 planes in the game.
 numPlanes = 0
@@ -44,6 +45,7 @@ end
 
 -- Called when this state is entered with the previous state.
 function play:enter(previous)
+   print("Just entered play state")
 end
 
 -- Called when this state is updated.
@@ -56,7 +58,7 @@ function play:update(dt)
          -- Spawn a plane with the plane image, make sure it's off the screen,
          -- give it a random theta (radial location), and random
          -- r and theta speeds.
-         table.insert(planes, Plane(plane_image, constants.SCREEN.x / 1.8, math.random(1,6), math.random(-20, -20), math.random(-100, 100) / 50))
+         table.insert(planes, Plane(plane_image, constants.SCREEN.x / 1.8, math.random(1,6), math.random(-20, -10), math.random(-100, 100) / 120))
       end
    end
 
@@ -99,6 +101,10 @@ function play:update(dt)
          plane:crashIntoSnake()
          table.remove(planes,i)
       end
+   end
+
+   if (constants.SNAKE_CURRENT_HEALTH <= 0) then
+      Gamestate.switch(gameover)
    end
 end
 
