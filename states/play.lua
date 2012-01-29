@@ -175,7 +175,7 @@ function play:update(dt)
             local died, matched = plane:getShot(bullet)
             if died then
                if matched then
-                  table.insert(booms, Explosion(booms.image, plane_position))
+                  table.insert(booms, Explosion(booms.image, plane_position, plane.color))
                   table.insert(chainwaves, ChainWave(chain_font, plane_position, plane.color))
                else
                   table.insert(poofs, Poof(poofs.image, plane_position))
