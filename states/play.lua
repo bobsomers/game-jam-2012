@@ -35,7 +35,7 @@ function play:init()
    love.graphics.setBackgroundColor(30, 80, 255)
 
    -- Create the snake.
-   snake = Snake(love.graphics.newImage("tmpart/ring.png"))
+   snake = Snake(love.graphics.newImage("Assets/Oroboroussmall.png"))
 
    -- Create the player.
    player = Player(love.graphics.newImage("tmpart/jamsackson.png"))
@@ -96,10 +96,9 @@ function play:update(dt)
          local plane_position = plane.position + center
          local distance = (plane_position - bullet.position):len()
          if distance < constants.BULLET_RADIUS + constants.PLANE_RADIUS then
-            -- Make an explosion
-            table.insert(booms, Explosion(booms.image, plane_position))
             -- If the plane is destroyed by this bullet, then remove it and the bullet
             if (plane:getShot(bullet)) then
+               table.insert(booms, Explosion(booms.image, plane_position))
                table.remove(planes, j)
                table.remove(bullets, i)
             end
@@ -165,7 +164,7 @@ function play:mousepressed(x, y, button)
    end
 
    if button == "r" then
-      table.insert(poofs, Poof(poofs.image, Vector(200, 200)))
+      table.insert(booms, Explosion(booms.image, Vector(200, 200)))
    end
 
    if button == "l" then
