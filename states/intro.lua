@@ -42,7 +42,7 @@ function intro:init()
    you_are = {
       text = "You are",
       opacity = 0,
-      position = Vector(350, 250)
+      position = Vector(330, 250)
    }
    jam_sackson = {
       text = "Jamuel L. Sackson",
