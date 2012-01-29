@@ -18,7 +18,7 @@ local Poof = Class(function(self, image, position)
    self.smoke:setPosition(position.x, position.y)
    self.smoke:setSpread(2 * math.pi)
    self.smoke:setLifetime(0.15)
-   self.smoke:setParticleLife(1.5)
+   self.smoke:setParticleLife(0.75)
 
    self.smoke:start()
 end)
