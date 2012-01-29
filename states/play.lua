@@ -37,7 +37,7 @@ function play:init()
    background = Background()
 
    -- Create the snake.
-   snake = Snake(love.graphics.newImage("tmpart/ring.png"))
+   snake = Snake(love.graphics.newImage("Assets/Oroboroussmall.png"))
 
    -- Create the player.
    player = Player(love.graphics.newImage("tmpart/jamsackson.png"))
