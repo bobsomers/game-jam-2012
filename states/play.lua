@@ -104,8 +104,8 @@ function play:update(dt)
             if (plane:getShot(bullet)) then
                table.insert(booms, Explosion(booms.image, plane_position))
                table.remove(planes, j)
-               table.remove(bullets, i)
             end
+               table.remove(bullets, i)
          end
       end
    end
