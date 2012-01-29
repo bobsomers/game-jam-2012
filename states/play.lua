@@ -163,7 +163,7 @@ function play:draw()
       poof:draw()
    end
 
-   hud.draw()   
+   hud:draw(0,0)   
 end
 
 function play:mousepressed(x, y, button)
