@@ -39,7 +39,7 @@ constants.BULLET_RADIUS = 5
 constants.PLANE_RADIUS = 25
 
 -- What are the possible colors for enemies?
-constants.ENEMY_COLORS = {"red", "green", "blue", "yellow"}
+constants.ENEMY_COLORS = {"yellow", "blue", "red", "green"}
 
 -- Integer  %. What chance is there per game update to increase the maximum
 -- allowed # of enemies in the game.
