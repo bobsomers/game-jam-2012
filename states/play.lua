@@ -96,6 +96,7 @@ function play:init()
       love.graphics.newImage("images/red_plane_1.png")}
    planeImages["green"] = love.graphics.newImage("images/green_plane.png")
 
+   -- Load the particle trail image.
    planes.trail = love.graphics.newImage("images/particle.png")
 
    -- Prep the effects.
@@ -132,7 +133,10 @@ function play:update(dt)
          -- and random r and theta speeds.
          local color = constants.ENEMY_COLORS[math.random(1, #constants.ENEMY_COLORS)]
          -- Generate the thetaSpeed
-         local thetaSpeed = math.random(10, 90) / 120 
+         -- The first of two params is the minimum absolute thetaSpeed, &
+         -- the second param is the maximum absolute thetaSpeed.
+         local thetaSpeed = math.random(15, 80) / 120 
+         -- Give a 50% chance to make it go the opposite direction.
          if (math.random(1,2) == 1) then
             thetaSpeed = thetaSpeed * -1
          end
