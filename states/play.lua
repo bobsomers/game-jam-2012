@@ -151,6 +151,9 @@ function play:update(dt)
       numPlanesToHave = numPlanesToHave + 1
    end
 
+   print("numPlanes is "..numPlanes)
+   print("numPlanesToHave is "..numPlanesToHave)
+
    -- Update all objects that need to be updated
    snake:update(dt)
    player:update(dt)

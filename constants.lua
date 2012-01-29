@@ -45,7 +45,7 @@ constants.BULLET_SIZE = Vector(10, 10)
 constants.BULLET_MATCHING_COLOR_DAMAGE = 100
 
 -- How much damage is dealt when the bullet and plane have different colors?
-constants.BULLET_NOT_MATCHING_COLOR_DAMAGE = 12
+constants.BULLET_NOT_MATCHING_COLOR_DAMAGE = 10
 
 -- For collision detection purposes...
 constants.BULLET_RADIUS = constants.BULLET_SIZE.x / 2
