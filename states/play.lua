@@ -307,5 +307,17 @@ function play:mousepressed(x, y, button)
    end
 end
 
+--[[
+function play:keypressed(key, unicode)
+   if (love.keyboard.isDown("spacebar") or butto) then
+      local direction = player.position:normalized()
+      local location = (constants.SCREEN / 2) + player.position +
+         (direction * player.SIZE.y)
+      table.insert(bullets, Bullet(bullets.images, location, direction,
+         snake:getCurrentColor(player.theta)))
+   end
+end
+]]
+
 -- Used for idiomatic module loading.
 return play
