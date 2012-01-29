@@ -203,7 +203,7 @@ function play:update(dt)
    end
 
    if (snakeHealth <= 0) then
-      Gamestate.switch(gameover)
+      Gamestate.switch(gameover, hud, planes, score)
    end
 
    -- Update the effects.
