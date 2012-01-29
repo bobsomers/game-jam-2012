@@ -5,6 +5,7 @@ local Snake = require "entities.snake"
 local Plane = require "entities.plane"
 local Player = require "entities.player"
 local Bullet = require "entities.bullet"
+local Background = require "fx.background"
 local Explosion = require "fx.explosion"
 local Poof = require "fx.poof"
 local constants = require "constants"
@@ -28,11 +29,12 @@ local planes = {}
 local bullets = {}
 local booms = {}
 local poofs = {}
+local background = {}
 
 -- Initialize the state. Called once when it's first created.
 function play:init()
-   -- White is a nice background color.
-   love.graphics.setBackgroundColor(30, 80, 255)
+   -- Load the background.
+   background = Background()
 
    -- Create the snake.
    snake = Snake(love.graphics.newImage("tmpart/ring.png"))
@@ -60,6 +62,8 @@ end
 -- Called when this state is updated.
 function play:update(dt)
    local center = constants.SCREEN / 2
+
+   background:update(dt)
 
    -- For each plane that's missing, let's give a 5% chance to craete it.
    for i = numPlanes, numPlanesToHave do
@@ -136,14 +140,18 @@ end
 
 -- Called when this state is drawn.
 function play:draw()
+   background:draw()
+
    snake:draw()
    player:draw()
+
    for i, plane in ipairs(planes) do
       plane:draw()
    end
    for i, bullet in ipairs(bullets) do
       bullet:draw()
    end
+
    for i, boom in ipairs(booms) do
       boom:draw()
    end
