@@ -12,10 +12,10 @@ local Snake = Class(function(self, image)
 end)
 
 function Snake:update(dt)
-   if love.keyboard.isDown("o") then
+   if love.keyboard.isDown("left") then
       self:spinCCW(dt)
    end
-   if love.keyboard.isDown("p") then
+   if love.keyboard.isDown("right") then
       self:spinCW(dt)
    end
 end

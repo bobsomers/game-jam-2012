@@ -15,10 +15,10 @@ local Player = Class(function(self, image)
 end)
 
 function Player:update(dt)
-   if love.keyboard.isDown("q") then
+   if love.keyboard.isDown("a") then
       self.theta = self.theta - self.SPIN_RATE * dt
    end
-   if love.keyboard.isDown("w") then
+   if love.keyboard.isDown("d") then
       self.theta = self.theta + self.SPIN_RATE * dt
    end
    self.position = utils.polarToCartesian(self.RADIUS, self.theta)
