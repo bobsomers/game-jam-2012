@@ -21,6 +21,25 @@ function sound.init()
       time = 0,
       last = 0
    }
+
+   smallExplosions = {
+      love.audio.newSource("sounds/explosion_1.wav", "static"),
+      love.audio.newSource("sounds/explosion_2.wav", "static"),
+      love.audio.newSource("sounds/explosion_3.wav", "static"),
+      love.audio.newSource("sounds/explosion_4.wav", "static")
+   }
+   
+   bigExplosions = {
+      love.audio.newSource("sounds/big_explosion_1.wav", "static"),
+      love.audio.newSource("sounds/big_explosion_2.wav", "static"),
+      love.audio.newSource("sounds/big_explosion_3.wav", "static"),
+      love.audio.newSource("sounds/big_explosion_4.wav", "static")
+   }
+
+   bulletFire = love.audio.newSource("sounds/bullet_fire.wav", "static");
+   warningBeep = love.audio.newSource("sounds/warning_beep.wav", "static");
+   gameOverSound = love.audio.newSource("sounds/motherfuckin.wav", "static");
+   snakeHitSound = love.audio.newSource("sounds/snake_hit.wav", "static");
 end
 
 function sound.playMenu()
@@ -42,6 +61,10 @@ function sound.walk(dt)
       love.audio.play(which)
       walks.last = walks.time
    end
+end
+
+function sound.snakeHit()
+   love.audio.play(snakeHitSound)
 end
 
 -- Used for idiomatic module loading.

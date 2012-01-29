@@ -194,9 +194,11 @@ function play:update(dt)
    for i, plane in ipairs(planes) do
       local plane_position = plane.position + center
       local distance = (plane_position - snake.position):len()
+      -- BULLET_RADIUS because it's small. Plane would be too big.
       if distance < constants.BULLET_RADIUS + constants.SNAKE_RADIUS then
          plane:crashIntoSnake()
          earthquake:shake(constants.CAMERA_SHAKE)
+         sound.snakeHit()
          table.insert(firejets, FireJet(firejets.image, plane_position))
          table.remove(planes,i)
       end
