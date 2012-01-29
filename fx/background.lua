@@ -6,27 +6,27 @@ local constants = require "constants"
 
 -- Define the class (and constructor).
 local Background = Class(function(self, camera)
-   self.plate = love.graphics.newImage("Assets/GGJ_Background.png")
+   self.plate = love.graphics.newImage("images/background.png")
    self.clouds = {
       {
-         image = love.graphics.newImage("Assets/GGJ_Background_cloud1.png"),
+         image = love.graphics.newImage("images/cloud_1.png"),
          rotation = 0,
          speed = 0.03
       },
       {
-         image = love.graphics.newImage("Assets/GGJ_Background_cloud2.png"),
+         image = love.graphics.newImage("images/cloud_2.png"),
          rotation = 0,
          speed = 0.05
       },
       {
-         image = love.graphics.newImage("Assets/GGJ_Background_cloud3.png"),
+         image = love.graphics.newImage("images/cloud_3.png"),
          rotation = 0,
          speed = 0.07
       }
    }
    self.stars = {
-      love.graphics.newImage("Assets/GGJ_Background_star1.png"),
-      love.graphics.newImage("Assets/GGJ_Background_star2.png")
+      love.graphics.newImage("images/stars_1.png"),
+      love.graphics.newImage("images/stars_2.png")
    }
    self.time = 0
    self.camera = camera

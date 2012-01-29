@@ -8,8 +8,8 @@ local Hud = Class(function(self)
       right = love.graphics.newImage("Assets/HUDbox_right.png")
    }
    self.fonts = {
-      title = love.graphics.newFont("Assets/Defused.ttf", 24),
-      score = love.graphics.newFont("Assets/WhiteRabbit.ttf", 56)
+      title = love.graphics.newFont("fonts/defused.ttf", 24),
+      score = love.graphics.newFont("fonts/white_rabbit.ttf", 56)
    }
    self.bar = {
       position = Vector(constants.SCREEN.x - 250, constants.SCREEN.y - 50),

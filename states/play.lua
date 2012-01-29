@@ -59,34 +59,34 @@ function play:init()
    -- Create the player.
    playerImages = {
       run = {
-         love.graphics.newImage("Assets/jamuel_run_frame0.png"),
-         love.graphics.newImage("Assets/jamuel_run_frame1.png")
+         love.graphics.newImage("images/jamuel_run_0.png"),
+         love.graphics.newImage("images/jamuel_run_1.png")
       },
       stand = {
-         love.graphics.newImage("Assets/jamuel_stand_frame0.png"),
-         love.graphics.newImage("Assets/jamuel_stand_frame1.png")
+         love.graphics.newImage("images/jamuel_stand_0.png"),
+         love.graphics.newImage("images/jamuel_stand_1.png")
       }
    }
    player = Player(playerImages)
 
    -- Prep the bullet frames.
    bullets.images = {
-      love.graphics.newImage("Assets/bullet_frame0.png"),
-      love.graphics.newImage("Assets/bullet_frame1.png"),
-      love.graphics.newImage("Assets/bullet_frame2.png"),
-      love.graphics.newImage("Assets/bullet_frame3.png"),
-      love.graphics.newImage("Assets/bullet_frame4.png"),
-      love.graphics.newImage("Assets/bullet_frame5.png"),
-      love.graphics.newImage("Assets/bullet_frame6.png")
+      love.graphics.newImage("images/bullet_0.png"),
+      love.graphics.newImage("images/bullet_1.png"),
+      love.graphics.newImage("images/bullet_2.png"),
+      love.graphics.newImage("images/bullet_3.png"),
+      love.graphics.newImage("images/bullet_4.png"),
+      love.graphics.newImage("images/bullet_5.png"),
+      love.graphics.newImage("images/bullet_6.png")
    }
    
    -- Prep the plane images and trail image. 
-   planeImages["yellow"] = love.graphics.newImage("Assets/yellowPlane.png")
-   planeImages["blue"] = love.graphics.newImage("Assets/bluePlane.png")
+   planeImages["yellow"] = love.graphics.newImage("images/yellow_plane.png")
+   planeImages["blue"] = love.graphics.newImage("images/blue_plane.png")
    planeImages["red"] = {
-      love.graphics.newImage("Assets/redplane_frame0.png"),
-      love.graphics.newImage("Assets/redplane_frame1.png")}
-   planeImages["green"] = love.graphics.newImage("Assets/greenPlane.png")
+      love.graphics.newImage("images/red_plane_0.png"),
+      love.graphics.newImage("images/red_plane_1.png")}
+   planeImages["green"] = love.graphics.newImage("images/green_plane.png")
 
    planes.trail = love.graphics.newImage("fx/particle.png")
 

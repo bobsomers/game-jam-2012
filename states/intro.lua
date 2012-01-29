@@ -20,7 +20,7 @@ local background = {}
 -- Initialize the state. Called once when it's first created.
 function intro:init()
    time = 0
-   font = love.graphics.newFont("Assets/Defused.ttf", 64)
+   font = love.graphics.newFont("fonts/defused.ttf", 64)
 
    sam_jackson = {
       text = "Samuel L. Jackson",
