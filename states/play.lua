@@ -6,6 +6,7 @@ local Plane = require "entities.plane"
 local Player = require "entities.player"
 local Bullet = require "entities.bullet"
 local constants = require "constants"
+
 -- Start off with 0 planes in the game.
 numPlanes = 0
 -- Start off wanting 1 plane in the game.
@@ -14,9 +15,6 @@ numPlanesToHave = 1
 plane_image = love.graphics.newImage("tmpart/plane.jpg")
 -- Seed the random number generator
 math.randomseed(1234)
-
--- TODO
---love.filesystem.load("bullet.lua")()
 
 -- Create the game state.
 local play = Gamestate.new()
@@ -50,8 +48,8 @@ end
 
 -- Called when this state is updated.
 function play:update(dt)
-   print("numplanes"..numPlanes)
-   print("numplanesToHave"..numPlanesToHave)
+   local center = constants.SCREEN / 2
+
    -- For each plane that's missing, let's give a 5% chance to craete it.
    for i = numPlanes, numPlanesToHave do
       if (math.random(1,100) <= 1) then 
@@ -71,10 +69,22 @@ function play:update(dt)
    end
    for i, bullet in ipairs(bullets) do
       bullet:update(dt)
-      local center = constants.SCREEN / 2
       local distance2 = (bullet.position - center):len2()
       if distance2 > center:len2() then
          table.remove(bullets, i)
+      end
+   end
+
+   -- Collision detection!
+   for i, bullet in ipairs(bullets) do
+      for j, plane in ipairs(planes) do
+         local plane_position = plane.position + center
+         local distance = (plane_position - bullet.position):len()
+         if distance < constants.BULLET_RADIUS + constants.PLANE_RADIUS then
+            plane:destroy()
+            table.remove(planes, j)
+            table.remove(bullets, i)
+         end
       end
    end
 end

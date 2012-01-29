@@ -34,5 +34,9 @@ constants.SNAKE_SPIN_RATE = 1.5
 -- How fast do bullets travel?
 constants.BULLET_SPEED = 150
 
+-- For collision detection purposes...
+constants.BULLET_RADIUS = 5
+constants.PLANE_RADIUS = 25
+
 -- Used for idiomatic module loading.
 return constants

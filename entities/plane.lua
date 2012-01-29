@@ -20,6 +20,7 @@ local Plane = Class(function(self, image, color, r, theta, rSpeed, thetaSpeed)
    self.rSpeed = rSpeed
    self.thetaSpeed = thetaSpeed
    self.health = constants.PLANE_HEALTH
+   self.position = utils.polarToCartesian(self.r, self.theta)
    numPlanes = numPlanes + 1
 end)
 
@@ -27,11 +28,10 @@ function Plane:update(dt)
    -- Update the radius and theta
    self.r = self.r + (dt * self.rSpeed)
    self.theta = self.theta + (dt * self.thetaSpeed)
+   self.position = utils.polarToCartesian(self.r, self.theta)
 end
 
 function Plane:draw()
-   local coordinates = utils.polarToCartesian(self.r, self.theta)
-
    -- We'll "scale" our image on the Y axis by either +1 or -1, depending on
    -- which way the plane needs to be facing to look in his direction of travel.
    local facing = 1
@@ -43,8 +43,8 @@ function Plane:draw()
    local centerX = constants.SCREEN.x / 2
    local centerY = constants.SCREEN.y / 2
 
-   local drawX = centerX + coordinates.x
-   local drawY = centerY + coordinates.y
+   local drawX = centerX + self.position.x
+   local drawY = centerY + self.position.y
 
    local scale = 0.1
 
