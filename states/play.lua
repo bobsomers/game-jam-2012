@@ -10,6 +10,7 @@ local Explosion = require "fx.explosion"
 local Poof = require "fx.poof"
 local constants = require "constants"
 local gameover = require "states.gameover"
+local Hud = require "entities.hud"
 
 -- Start off with 0 planes in the game.
 numPlanes = 0
@@ -30,6 +31,7 @@ local bullets = {}
 local booms = {}
 local poofs = {}
 local background = {}
+local hud = {}
 
 -- Initialize the state. Called once when it's first created.
 function play:init()
@@ -53,6 +55,8 @@ function play:init()
    -- Prep the effects.
    booms.image = love.graphics.newImage("fx/particle.png")
    poofs.image = love.graphics.newImage("fx/particle.png")
+
+   hud = Hud()
 end
 
 -- Called when this state is entered with the previous state.
@@ -162,6 +166,8 @@ function play:draw()
    for i, poof in ipairs(poofs) do
       poof:draw()
    end
+
+   hud.draw()   
 end
 
 function play:keypressed(key)
