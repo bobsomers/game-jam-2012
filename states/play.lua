@@ -12,6 +12,10 @@ local constants = require "constants"
 local gameover = require "states.gameover"
 local Hud = require "entities.hud"
 
+-- The player's score
+score = 0
+-- The snake should start with its max health
+snakeHealth = constants.SNAKE_MAX_HEALTH
 -- Start off with 0 planes in the game.
 numPlanes = 0
 -- Start off wanting 1 plane in the game.
@@ -124,7 +128,7 @@ function play:update(dt)
       end
    end
 
-   if (constants.SNAKE_CURRENT_HEALTH <= 0) then
+   if (snakeHealth <= 0) then
       Gamestate.switch(gameover)
    end
 
