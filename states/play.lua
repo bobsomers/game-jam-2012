@@ -54,7 +54,7 @@ function play:init()
    background = Background(camera)
 
    -- Create the snake.
-   snake = Snake(love.graphics.newImage("Assets/Oroboroussmall.png"))
+   snake = Snake(love.graphics.newImage("images/oroborous_small.png"))
 
    -- Create the player.
    playerImages = {

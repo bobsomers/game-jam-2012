@@ -60,7 +60,7 @@ function intro:init()
    }
 
    background = {
-      image = love.graphics.newImage("Assets/menuBackground.png"),
+      image = love.graphics.newImage("images/menu_background.png"),
       opacity = 0
    }
 end

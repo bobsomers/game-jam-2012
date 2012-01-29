@@ -16,23 +16,23 @@ local oro = {}
 -- Initialize the state. Called once when it's first created.
 function menu:init()
    background = {
-      image = love.graphics.newImage("Assets/menuBackground.png"),
+      image = love.graphics.newImage("images/menu_background.png"),
    }
 
    menuPlane = {
-      image = love.graphics.newImage("Assets/menuPlane.png"),
+      image = love.graphics.newImage("images/menu_plane.png"),
       position = Vector(-1000, 0),
       velocity = Vector(0, 0)
    }
 
    logo = {
-      image = love.graphics.newImage("Assets/Logo.png"),
+      image = love.graphics.newImage("images/title.png"),
       position = Vector(1025, 100),
       velocity = Vector(0, 0)
    }
 
    oro = {
-      image = love.graphics.newImage("Assets/ShadowOroborous.png"),
+      image = love.graphics.newImage("images/oroborous_shadow.png"),
       position = Vector(constants.CENTER.x, 1500),
       rotation = 0,
       velocity = Vector(0, 0)

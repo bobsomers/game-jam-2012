@@ -4,8 +4,8 @@ local constants = require "constants"
 
 local Hud = Class(function(self)
    self.images = {
-      left = love.graphics.newImage("Assets/HUDbox_left.png"),
-      right = love.graphics.newImage("Assets/HUDbox_right.png")
+      left = love.graphics.newImage("images/hud_left.png"),
+      right = love.graphics.newImage("images/hud_right.png")
    }
    self.fonts = {
       title = love.graphics.newFont("fonts/defused.ttf", 24),
