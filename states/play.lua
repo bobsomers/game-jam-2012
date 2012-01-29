@@ -16,15 +16,19 @@ local Hud = require "entities.hud"
 local sound = require "sound"
 local ChainWave = require "entities.chain_wave"
 
--- The player's score and multiplier
+-- The player's score and multiplier.
 score = 0
 multiplier = 1
--- The snake should start with its max health
+-- The snake should start with its max health.
 snakeHealth = constants.SNAKE_MAX_HEALTH
 -- Start off with 0 planes in the game.
 numPlanes = 0
 -- Start off wanting 1 plane in the game.
 numPlanesToHave = 1
+-- The number of planes that the player has destroyed so far.
+numPlanesDestroyed = 0
+-- Start at 1, and get harder by 0.1 for every 15 planes destroyed.
+numPlanesDestroyedDifficultyMultiplier = 1
 -- Seed the random number generator based on the system time
 math.randomseed(os.time())
 
@@ -143,12 +147,12 @@ function play:update(dt)
 
          table.insert(planes, Plane(color, planeImages[color], planes.trail,
           constants.SCREEN.x / 1.9, math.random(1,6), math.random(-21, -12),
-          thetaSpeed))
+          thetaSpeed * numPlanesDestroyedDifficultyMultiplier))
       end
    end
 
    -- Give a low chance per update to increase the maximum allowed # of planes
-   if (math.random(1,100) <= constants.INCREASE_MAX_ENEMY_COUNT_CHANCE) then
+   if (math.random(1,100) <= constants.INCREASE_MAX_ENEMY_COUNT_CHANCE * numPlanesDestroyedDifficultyMultiplier) then
       numPlanesToHave = numPlanesToHave + 1
    end
 

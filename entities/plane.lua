@@ -94,6 +94,12 @@ end
 
 function Plane:destroy()
    numPlanes = numPlanes - 1
+   numPlanesDestroyed = numPlanesDestroyed + 1
+   -- If the player has destroyed another 15 planes, make the game a bit harder
+   if (numPlanesDestroyed % 15 == 1) then
+      numPlanesDestroyedDifficultyMultipier = numPlanesDestroyedDifficultyMultiplier + 0.1
+   end
+
    -- Give a chance of decreasing the max # of planes the game should have
    if (math.random(1,100) < constants.DECREASE_MAX_ENEMY_COUNT_CHANCE) then
       numPlanesToHave = numPlanesToHave -1
