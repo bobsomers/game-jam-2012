@@ -88,12 +88,12 @@ function play:init()
       love.graphics.newImage("images/red_plane_1.png")}
    planeImages["green"] = love.graphics.newImage("images/green_plane.png")
 
-   planes.trail = love.graphics.newImage("fx/particle.png")
+   planes.trail = love.graphics.newImage("images/particle.png")
 
    -- Prep the effects.
-   booms.image = love.graphics.newImage("fx/particle.png")
-   poofs.image = love.graphics.newImage("fx/particle.png")
-   firejets.image = love.graphics.newImage("fx/particle.png")
+   booms.image = love.graphics.newImage("images/particle.png")
+   poofs.image = love.graphics.newImage("images/particle.png")
+   firejets.image = love.graphics.newImage("images/particle.png")
 
    hud = Hud()
 end
