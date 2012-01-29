@@ -32,7 +32,7 @@ constants.PLAYER_SPIN_RATE = 1.5
 constants.SNAKE_SPIN_RATE = 1.5
 
 -- How fast do bullets travel?
-constants.BULLET_SPEED = 150
+constants.BULLET_SPEED = 250
 
 -- For collision detection purposes...
 constants.BULLET_RADIUS = 5

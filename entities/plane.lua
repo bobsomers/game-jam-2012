@@ -39,7 +39,6 @@ function Plane:draw()
       facing = -1
    end
 
-   -- TODO: REPLACE THESE CONSTANTS
    local centerX = constants.SCREEN.x / 2
    local centerY = constants.SCREEN.y / 2
 

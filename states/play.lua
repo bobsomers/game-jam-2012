@@ -56,7 +56,7 @@ function play:update(dt)
          -- Spawn a plane with the plane image, make sure it's off the screen,
          -- give it a random theta (radial location), and random
          -- r and theta speeds.
-         table.insert(planes, Plane(plane_image, constants.SCREEN.x / 1.8, math.random(1,6), math.random(-20, -10), math.random(-100, 100) / 100))
+         table.insert(planes, Plane(plane_image, constants.SCREEN.x / 1.8, math.random(1,6), math.random(-20, -10), math.random(-100, 100) / 120))
       end
    end
 
