@@ -37,6 +37,7 @@ local poofs = {}
 local background = {}
 local hud = {}
 local planeImages = {}
+local playerImages = {}
 
 -- Initialize the state. Called once when it's first created.
 function play:init()
@@ -47,7 +48,17 @@ function play:init()
    snake = Snake(love.graphics.newImage("Assets/Oroboroussmall.png"))
 
    -- Create the player.
-   player = Player(love.graphics.newImage("tmpart/jamsackson.png"))
+   playerImages = {
+      run = {
+         love.graphics.newImage("Assets/jamuel_run_frame0.png"),
+         love.graphics.newImage("Assets/jamuel_run_frame1.png")
+      },
+      stand = {
+         love.graphics.newImage("Assets/jamuel_stand_frame0.png"),
+         love.graphics.newImage("Assets/jamuel_stand_frame1.png")
+      }
+   }
+   player = Player(playerImages)
 
    -- Prep the bullet frames.
    bullets.images = {
