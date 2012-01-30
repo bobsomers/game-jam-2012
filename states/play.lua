@@ -327,5 +327,16 @@ function play:mousepressed(x, y, button)
    end
 end
 
+function play:keypressed(key)
+   if key == " " then
+      local direction = player.position:normalized()
+      local location = (constants.SCREEN / 2) + player.position +
+         (direction * player.SIZE.y)
+      table.insert(bullets, Bullet(bullets.images, location, direction,
+         snake:getCurrentColor(player.theta)))
+      sound.bulletFire()
+   end
+end
+
 -- Used for idiomatic module loading.
 return play
