@@ -146,6 +146,7 @@ end
 -- Called when this state is entered with the previous state.
 function play:enter(previous)
    self:reset()
+   sound.playMusic()
 end
 
 -- Called when this state is updated.
