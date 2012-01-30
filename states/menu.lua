@@ -7,15 +7,23 @@ local sound = require "sound"
 -- Create the game state.
 local menu = Gamestate.new()
 
+local font = {}
 local spring_k = 0.4
 local friction = 0.85
 local background = {}
 local menuPlane = {}
 local logo = {}
 local oro = {}
+local instructions = {}
 
 -- Initialize the state. Called once when it's first created.
 function menu:init()
+   self:reset()
+end
+
+function menu:reset()
+   font = love.graphics.newFont("fonts/defused.ttf", 64)
+
    background = {
       image = love.graphics.newImage("images/menu_background.png"),
    }
@@ -47,8 +55,7 @@ end
 
 -- Called when this state is entered with the previous state.
 function menu:enter(previous)
-   -- TODO: reset
-
+   self:reset()
 end
 
 -- Called when this state is updated.
@@ -69,6 +76,8 @@ end
 
 -- Called when this state is drawn.
 function menu:draw()
+   love.graphics.setFont(font)
+
    love.graphics.draw(background.image, 0,0)
 
    love.graphics.draw(oro.image,
@@ -81,7 +90,7 @@ function menu:draw()
 
    love.graphics.draw(logo.image, logo.position.x, logo.position.y)
 
-   love.graphics.print("Shoot: click or spacebar",
+   love.graphics.print("Shoot: left click or spacebar",
       instructions.position.x + 20, instructions.position.y, 0, .4,.4)
    love.graphics.print("Spin: scroll wheel or keyboard W & S ",
       instructions.position.x + 20, instructions.position.y + 50, 0, .4,.4)

@@ -56,6 +56,27 @@ local chain_font = {}
 
 -- Initialize the state. Called once when it's first created.
 function play:init()
+   self:reset()
+end
+
+function play:reset()
+   snake = {}
+   player = {}
+   planes = {}
+   bullets = {}
+   booms = {}
+   poofs = {}
+   firejets = {}
+   background = {}
+   hud = {}
+   planeImages = {}
+   playerImages = {}
+   camera = {}
+   earthquake = {}
+   chainwaves = {}
+   awesomes = {}
+   chain_font = {}
+
    -- Camera is looking at the center of the window.
    camera = Camera(constants.CENTER:clone(), 1, 0)
    earthquake = Earthquake(camera)
@@ -109,17 +130,22 @@ function play:init()
    firejets.image = love.graphics.newImage("images/particle.png")
 
    hud = Hud()
+
+   score = 0
+   multiplier = 1
+   -- The snake should start with its max health
+   snakeHealth = constants.SNAKE_MAX_HEALTH
+   -- Start off with 0 planes in the game.
+   numPlanes = 0
+   -- Start off wanting 1 plane in the game.
+   numPlanesToHave = 1
+   -- Seed the random number generator based on the system time
+   math.randomseed(os.time())
 end
 
 -- Called when this state is entered with the previous state.
 function play:enter(previous)
-   snakeHealth = constants.SNAKE_MAX_HEALTH
-   score = 0
-
-   sound.playMusic()
-
-   --planes = {}  --resetting planes breaks the game for some reason
-   --bullets = {}
+   self:reset()
 end
 
 -- Called when this state is updated.

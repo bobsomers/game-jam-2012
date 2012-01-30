@@ -52,7 +52,7 @@ end
 -- Called when this state is updated.
 function gameover:update(dt)
    if fadeOut < 255 then
-	fadeOut = fadeOut + dt*20    
+	fadeOut = fadeOut + dt*30    
    end
 
    if fadeOut > 255 then
@@ -81,22 +81,23 @@ function gameover:draw()
 	   love.graphics.setColor(255,255,255, fadeOut-100)
 	   love.graphics.print("By", constants.CENTER.x-20, constants.CENTER.y + 20, 0, .4, .4 )
 	   love.graphics.print("Taylor Arnicar", constants.CENTER.x-50, constants.CENTER.y + 50, 0, .4, .4 )
-	   love.graphics.print("Katherine Blizard", constants.CENTER.x-10, constants.CENTER.y + 070, 0, .4, .4 )
-	   love.graphics.print("Sterling Hirsh", constants.CENTER.x-40, constants.CENTER.y + 100, 0, .4 ,.4 )
-	   love.graphics.print("Marc Zych", constants.CENTER.x+20, constants.CENTER.y + 130 , 0, .4 ,.4 )
-	   love.graphics.print("Bob Somers", constants.CENTER.x+50, constants.CENTER.y + 160 , 0, .4 ,.4 )
-	   love.graphics.print("Shirley Song", constants.CENTER.x+30, constants.CENTER.y + 190 , 0, .4 ,.4 )
+	   love.graphics.print("Katherine Blizard", constants.CENTER.x-10, constants.CENTER.y + 80, 0, .4, .4 )
+	   love.graphics.print("Sterling Hirsh", constants.CENTER.x-40, constants.CENTER.y + 110, 0, .4 ,.4 )
+	   love.graphics.print("Marc Zych", constants.CENTER.x+20, constants.CENTER.y + 140 , 0, .4 ,.4 )
+	   love.graphics.print("Bob Somers", constants.CENTER.x+50, constants.CENTER.y + 170 , 0, .4 ,.4 )
+	   love.graphics.print("Shirley Song", constants.CENTER.x+30, constants.CENTER.y + 200 , 0, .4 ,.4 )
    end
    love.graphics.setColor(255,255,255,255)
    hud:draw(0, score)
 end
 
 function gameover:keypressed()
-   --play = Gamestate.new()  
+   sound.playMenu()
    Gamestate.switch(menu)
 end
 
 function gameover:mousepressed()
+   sound.playMenu()
    Gamestate.switch(menu)
 end
 
