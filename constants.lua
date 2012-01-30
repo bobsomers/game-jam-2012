@@ -15,7 +15,7 @@ constants.SCREEN = Vector(1024, 768)
 constants.CENTER = constants.SCREEN / 2
 
 -- Are we in debug mode?
-constants.DEBUG_MODE = true
+constants.DEBUG_MODE = false
 
 -- The amount of health a plane has.
 constants.PLANE_HEALTH = 100
@@ -72,6 +72,9 @@ constants.CAMERA_SHAKE = 25
 
 -- Growth rate of chain wave (in radius pixels per second).
 constants.CHAIN_WAVE_GROWTH_RATE = 150
+
+-- Clean version?
+constants.CLEAN_VERSION = false
 
 -- Used for idiomatic module loading.
 return constants

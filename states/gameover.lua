@@ -31,10 +31,27 @@ local snake = {}
 local score = 0
 local snakeHealth = 0
 
-local fadeOut = 0;
+local wait_time = 0
+local fadeOut = 0
 
 -- Initialize the state. Called once when it's first created.
 function gameover:init()
+   self:reset()
+end
+
+function gameover:reset()
+   background = {}
+   goLogo = {}
+   menuPlane = {}
+   hud = {}
+   planes = {}
+   snake = {}
+   score = 0
+   snakeHealth = 0
+   
+   fadeOut = 0
+   wait_time = 0
+
    background = love.graphics.newImage("images/background.png")
    goLogo = love.graphics.newImage("images/game_over.png")
    menuPlane = love.graphics.newImage("images/menu_plane.png")
@@ -42,15 +59,17 @@ end
 
 -- Called when this state is entered with the previous state.
 function gameover:enter(previouis, hudd, oldplanes, Rscore)
-   --background = bg 
+   self:reset()
+
    hud = hudd
    planes = oldplanes   
    score = Rscore
-   fadeOut = 0
 end
 
 -- Called when this state is updated.
 function gameover:update(dt)
+   wait_time = wait_time + dt
+
    if fadeOut < 255 then
       -- The number after dt determines how fast the fadeout happens
 	fadeOut = fadeOut + dt*45
@@ -93,13 +112,17 @@ function gameover:draw()
 end
 
 function gameover:keypressed()
-   sound.playMenu()
-   Gamestate.switch(menu)
+   if wait_time > 2 then
+      sound.playMenu()
+      Gamestate.switch(menu)
+   end
 end
 
 function gameover:mousepressed()
-   sound.playMenu()
-   Gamestate.switch(menu)
+   if wait_time > 2 then
+      sound.playMenu()
+      Gamestate.switch(menu)
+   end
 end
 
 -- Used for idiomatic module loading.

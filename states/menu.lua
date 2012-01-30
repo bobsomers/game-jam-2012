@@ -99,12 +99,16 @@ function menu:draw()
 end
 
 function menu:keypressed()
-   sound.motherfuckin()
+   if constants.CLEAN_VERSION == false then
+      sound.motherfuckin()
+   end
    Gamestate.switch(play)
 end
 
 function menu:mousepressed()
-   sound.motherfuckin()
+   if constants.CLEAN_VERSION == false then
+      sound.motherfuckin()
+   end
    Gamestate.switch(play)
 end
 

@@ -3,6 +3,7 @@ local Vector = require "hump.vector"
 local constants = require "constants"
 local Explosion = require "fx.explosion"
 local Awesome = require "fx.awesome"
+local sound = require "sound"
 
 local ChainWave = Class(function(self, font, position, color)
    self.font = font
@@ -30,6 +31,7 @@ function ChainWave:update(dt, planes, booms, awesomes, chainwaves)
             table.insert(booms, Explosion(booms.image, plane_position, self.color))
             table.insert(awesomes, Awesome(self.font, multiplier, plane_position))
             table.insert(chainwaves, ChainWave(self.font, plane_position, self.color))
+            sound.bigExplosion()
          end
       end
    end
