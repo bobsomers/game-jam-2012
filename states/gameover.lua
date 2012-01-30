@@ -52,7 +52,8 @@ end
 -- Called when this state is updated.
 function gameover:update(dt)
    if fadeOut < 255 then
-	fadeOut = fadeOut + dt*30    
+      -- The number after dt determines how fast the fadeout happens
+	fadeOut = fadeOut + dt*45
    end
 
    if fadeOut > 255 then
