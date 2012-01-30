@@ -90,7 +90,7 @@ function menu:draw()
 
    love.graphics.draw(logo.image, logo.position.x, logo.position.y)
 
-   love.graphics.print("Shoot: left click",
+   love.graphics.print("Shoot: left click or spacebar",
       instructions.position.x + 20, instructions.position.y, 0, .4,.4)
    love.graphics.print("Spin: scroll wheel or keyboard W & S ",
       instructions.position.x + 20, instructions.position.y + 50, 0, .4,.4)
